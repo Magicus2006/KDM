@@ -1,0 +1,380 @@
+<html>
+  <head>
+      <script type="text/javascript" src="files/jquery-3.6.0.min.js"></script>
+      <style>
+          .calculator {
+              width: 290px;
+              border-top: 1px solid #ccc;
+              border-left: 1px solid #ccc;
+          }
+          .table_result_css {
+              border-top: 1px solid #ccc;
+              border-left: 1px solid #ccc;
+          }
+          
+          .table_result_css td, .calculator th {
+              border-bottom: 1px solid #ccc;
+              border-right: 1px solid #ccc;
+              padding: 3px 8px 3px 8px;
+          }
+          
+          .table_result_css th {
+              background: #f17336;
+              padding: 8px 0px 8px 0px;
+              color: #fff;
+              font-size: 15px;
+          }
+
+          .calculator td, .calculator th {
+              border-bottom: 1px solid #ccc;
+              border-right: 1px solid #ccc;
+              padding: 3px 8px 3px 8px;
+          }
+
+          .calculator th {
+              background: #f17336;
+              padding: 8px 0px 8px 0px;
+              color: #fff;
+              font-size: 15px;
+          }
+
+          .calculator td.head {
+              font-weight: bold;
+              font-size: 12px;
+              white-space: nowrap;
+              width: 93px;
+          }
+
+          .calculator td input {
+              width: 70px !important;
+              border: 1px solid #999;
+          }
+
+          .calculator td.result, td.result_km {
+              color: green;
+              font-size: 12px;
+              text-align: center;
+          }
+
+          .form_image {
+              padding-left: 20px
+          }
+
+          .CalcPad {
+              margin: 20px;
+          }
+
+          .PlotnostSel {
+              width: 163px;
+          }
+
+          .ForStCalc {
+              display: none;
+          }
+
+          .redHeader, .redHeader td {
+              color: red;
+              text-align: center;
+              border: none !important;
+	  }
+	  .red_text {
+		color: red;	
+	  }
+          
+      </style>
+  </head>
+  <body>
+    <img src="files/kdm_logo.jpg" width="400px">
+    <script type="text/javascript">
+    // var
+    let facade_width =  [400, 450, 500, 550, 600, 700, 800, 900, 1000, 1200, 1500, 1800];
+    let facede_height = [300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1040]
+
+    $(function () {
+        var PlotnArray = Array();
+
+        PlotnArray[0] = {'PLOTN': 0.76, 'NAME': 'МДФ', 'USE_GLASS': false, 'PICTURE_ID': 'mdf'};
+        PlotnArray[1] = {'PLOTN': 0.68, 'NAME': 'ДСП', 'USE_GLASS': false, 'PICTURE_ID': 'dsp'};
+        //PlotnArray[1] = {'PLOTN': 2.5, 'NAME': 'СТЕКЛО', 'USE_GLASS': false, 'PICTURE_ID': 'glass'};
+        //PlotnArray[2] = {'PLOTN': 0.76, 'NAME': 'МДФ', 'USE_GLASS': false, 'PICTURE_ID': 'mdf'};
+        //PlotnArray[3] = {'PLOTN': 0.76, 'NAME': 'МДФ', 'USE_GLASS': true, 'PICTURE_ID': 'mdf_glass'};
+        //PlotnArray[4] = {'PLOTN': 0.68, 'NAME': 'ДСП', 'USE_GLASS': true, 'PICTURE_ID': 'dsp_glass'};
+
+        //PlotnArray[5] = {'PLOTN': 0.68, 'NAME': 'Массив бука', 'USE_GLASS': false, 'PICTURE_ID': 'mas_buk'};
+        //PlotnArray[6] = {'PLOTN': 0.69, 'NAME': 'Массив дуба', 'USE_GLASS': false, 'PICTURE_ID': 'mas_dub'};
+        //PlotnArray[7] = {'PLOTN': 0.56, 'NAME': 'Массив ольхи', 'USE_GLASS': false, 'PICTURE_ID': 'mas_olha'};
+        //PlotnArray[8] = {'PLOTN': 0.52, 'NAME': 'Массив сосны', 'USE_GLASS': false, 'PICTURE_ID': 'mas_sosna'};
+        //PlotnArray[9] = {'PLOTN': 0.83, 'NAME': 'Массив акации', 'USE_GLASS': false, 'PICTURE_ID': 'mas_akatcia'};
+        var handleWeight = Array();
+        handleWeight[0] = {'name': 'Not handle', 'handleWeight': 0}
+        handleWeight[1] = {'name': 'Min handle', 'handleWeight': 0.1}
+        handleWeight[2] = {'name': 'Min2 handle', 'handleWeight': 0.2}
+        handleWeight[3] = {'name': 'Middle handle', 'handleWeight': 0.5}
+        handleWeight[4] = {'name': 'Heavy handle', 'handleWeight': 1}
+
+        function ShowPictureType() {
+            var plotnost = $("select[name=plotnost]").val();
+
+            $(".form_image div").css("display", "none");
+            $("#" + PlotnArray[plotnost]['PICTURE_ID']).css("display", "block");
+        }
+
+        // устанавливаем начальное значение толщины в зависимости от плотности материала
+        function SetTolsh() {
+            var plotnost = $("select[name=plotnost]").val();
+
+            // устанавливаем значение толщины по умолчанию для материала
+            if (plotnost == 0 || plotnost == 4) {
+                $("input[name=tolsh]").val(16);
+            }
+            if (plotnost == 1) {
+                $("input[name=tolsh]").val(16);
+            }
+            if (plotnost == 2 || plotnost == 3) {
+                $("input[name=tolsh]").val(16);
+            }
+        }
+
+        // скрывает или показывает поля для дополнительного расчета стекла
+        function ShowHideGlassFields() {
+            var plotnost = $("select[name=plotnost]").val();
+            var bUseGlass = PlotnArray[plotnost]['USE_GLASS'];
+
+            if (bUseGlass) {
+                $(".redHeader").css("visibility", "visible");
+                $(".ForStCalc").css("display", "block");
+                $(".materialHeader").html(PlotnArray[plotnost]['NAME']);
+            } else {
+                $(".redHeader").css("visibility", "hidden");
+                $(".ForStCalc").css("display", "none");
+            }
+        }
+
+        // расчитывает вес материала
+        function CalculateMaterial() {
+            var plotnost = parseFloat($("select[name=plotnost]").val().toString().replace(/,/, "."));
+            var tolsh = parseFloat($("input[name=tolsh]").val().toString().replace(/,/, "."));
+            var width = parseFloat($("input[name=width]").val().toString().replace(/,/, "."));
+            var height = parseFloat($("input[name=height]").val().toString().replace(/,/, "."));
+	        var handleWeightVar = parseFloat($("select[name=handleWeight]").val().toString().replace(/,/, "."));
+            var ves = 0;
+
+            ves = parseFloat((tolsh * width * height / 1000000) * PlotnArray[plotnost]['PLOTN']);
+	        ves += handleWeight[handleWeightVar]['handleWeight']
+            GetAventosTypesAvalide(PlotnArray[plotnost]['PLOTN'], tolsh, width, height, handleWeightVar)
+            return ves;
+        }
+        // Мой расчитывает вес материала
+        function CalculateMaterialMy(height, width) {
+            var plotnost = parseFloat($("select[name=plotnost]").val().toString().replace(/,/, "."));
+            var tolsh = parseFloat($("input[name=tolsh]").val().toString().replace(/,/, "."));
+            var handleWeightVar = parseFloat($("select[name=handleWeight]").val().toString().replace(/,/, "."));
+
+            //var my_width = parseFloat( $("input[name=width]").val().toString().replace(/,/, "."));
+            //var my_height = parseFloat($("input[name=height]").val().toString().replace(/,/, "."));
+            var ves = 0;
+
+            ves = parseFloat((tolsh / 1000) * (width / 1000) * (height / 1000) * (PlotnArray[plotnost]['PLOTN']*1000));
+	        ves += handleWeight[handleWeightVar]['handleWeight']
+            return ves;
+        }
+
+        // расчитывает вес стекла
+        function CalculateSteclo() {
+            var tolsh = parseFloat($("input[name=st_tolsh]").val().toString().replace(/,/, "."));
+            var width = parseFloat($("input[name=st_width]").val().toString().replace(/,/, "."));
+            var height = parseFloat($("input[name=st_height]").val().toString().replace(/,/, "."));
+            var ves = 0;
+
+            ves = parseFloat((tolsh * width * height / 1000000) * PlotnArray[1]['PLOTN']);
+
+            return ves;
+        }
+
+        function createTableFacadeResult() {
+            
+            var content= '<table class="table_result_css"><tr><th rowspan="2">Высота фасада</th><th colspan="'+facade_width.length+'">Ширина фасада</th></tr><tr>'
+
+            facade_width.forEach(function(item, i, facade_width) {
+                content += '<th>'+item+'</th>'
+            });
+            content += '</tr>'
+            
+            for (index = 0; index < facede_height.length; ++index) {
+                content += '<tr><th>'+facede_height[index]+'</th>'
+                facade_width.forEach(function(item, i, facade_width) {
+                    var km = (CalculateMaterialMy(facede_height[index], item)*facede_height[index]).toFixed(0)
+                    //if (km > 17250) {
+                    //    km = '-'
+                    //}
+                    content += '<td>'+km+'</td>'
+                });
+                content += '</tr>'
+            }
+            
+            content += '</table>'
+            $('#table_result').html(content);
+        }
+
+        // Запрос к серверу на получение комплектов подемников
+        function GetAventosTypesAvalide(plotnost, tolsh, width, height, handleWeightVar) {
+            //$.post("/api/aventos/", {handleWeight: "1", height: "111", thickness: "16", width: "120"})
+            //    .done(function(data) {
+            //        alert("Data Loaded: " + data);
+            //    });
+            data = {"handleWeight": handleWeightVar, "height": height, "thickness": tolsh, "width": width, "density": plotnost};
+            url = "/api/aventos/"
+            $.ajax({
+                    'type': 'POST',
+                    'url': url,
+                    'contentType': 'application/json',
+                    'data': JSON.stringify(data),
+                    'dataType': 'json',
+                    'success': function(response){
+                        //alert("Data Loaded: " + JSON.stringify(response));
+                        $("#divAventosTypes").html(JSON.stringify(response))
+                    }
+                });
+
+            /*$.post( "/api/aventos/", JSON.stringify({handleWeight: 1, height: 111, thickness: 16, width: 120}), function( data ) {
+                alert("Data Loaded: " + data);
+                }, "json");
+            $.ajax({
+                url:"/api/aventos/",
+                type:"POST",
+                data: data,
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success: function(response){
+                    alert("Data Loaded: " + response);
+                }
+            })*/
+
+        }
+        
+        // производит расчет и вывод результата
+        function Calculate() {
+            var plotnost = $("select[name=plotnost]").val();
+            var bUseGlass = PlotnArray[plotnost]['USE_GLASS'];
+            var ves = 0;
+
+            if (bUseGlass) {
+                // alert(CalculateMaterial()+" "+CalculateSteclo());
+                ves = CalculateMaterial() + CalculateSteclo();
+            } else {
+                ves = CalculateMaterial();
+            }
+
+            $(".result").html(ves.toFixed(2));
+            var height = parseFloat($("input[name=height]").val().toString().replace(/,/, "."));
+            var km = ves * height
+            $(".result_km").html(km.toFixed(0));
+            createTableFacadeResult()
+
+        }
+
+        
+        $(".form_image div").css("display", "none");
+        $("#dsp").css("display", "block");
+
+        $(".calculator input").bind("change", function () {
+            Calculate();
+        })
+
+        $(".calculator select").bind("change", function () {
+            ShowPictureType();
+            SetTolsh();
+            ShowHideGlassFields();
+            Calculate();
+        });
+
+        // проводим инициализацию при загрузке страницы
+        ShowPictureType();
+        SetTolsh();
+        ShowHideGlassFields();
+        createTableFacadeResult()
+    });
+</script>
+<div class="CalcPad">
+    <h1>Расчет веса фасада</h1><br>
+
+                <table cellpadding="0" cellspacing="0" class="calculator">
+                    <tbody><tr>
+                        <th colspan="3" align="center">Расчет веса двери</th>
+                    </tr>
+                    <tr>
+                        <td class="head">Материал фасада</td>
+                        <td colspan="2">
+                            <select name="plotnost" class="PlotnostSel">
+                                <option value="0">МДФ</option>
+                                <option value="1">ДСП</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody></table>
+
+                <br>
+                <table cellpadding="0" cellspacing="0" class="calculator redHeader" style="visibility: hidden;">
+                    <tbody><tr>
+                        <td class="head">&nbsp;</td>
+                        <td class="materialHeader">МДФ</td>
+                        <td>Стекло</td>
+                    </tr>
+                </tbody></table>
+
+                <table cellpadding="0" cellspacing="0" class="calculator">
+                    <tbody><tr>
+                        <td class="head">Толщина, мм</td>
+                        <td width="65"><input type="text" name="tolsh" value="19"></td>
+                    </tr>
+                    <tr>
+                        <td class="head">Ширина, мм</td>
+                        <td width="65"><input type="text" name="width" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td class="head">Высота, мм</td>
+                        <td width="65"><input type="text" name="height" value="0"></td>
+                    </tr>
+ 		    <tr>
+                        <td class="head">Вес ручки, кг</td>
+                        <td>
+                            <select name="handleWeight" class="handleWeightClass">
+                                <option value="0">Без ручки</option>
+                                <option value="1">0,1 Легкая</option>
+                                <option value="2">0,2 Легкая</option>
+                                <option value="3">0,5 Средняя</option>
+                                <option value="4">1,0 Тяжелая</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="head">Вес двери, кг</td>
+                        <td class="result">0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="head">Коэффициент мощности, кг</td>
+                        <td class="result_km">0</td>
+                    </tr>
+		    <tr>
+                        <td colspan=3 class="head">Расчет веса фасадов (м) х Ширина фасада (м) х Толщина фасадов х Плотность(кг/м3)<br>
+<span class="red_text">Калькулятор носит рекомендательный характер!!!</span><br>
+Точный вес фасадов из различных материалов определяется взвешиванием.<br>
+
+
+При выборе силового механизма учитывайте вес ручки<br>
+
+AVENTOS HF, HL, HS + вес ручки<br>
+AVENTOS HR тор, HK-S, HK-XS + двойной вес ручки</td>
+		    </tr>
+                </tbody></table>
+            
+    
+</div>
+    <div id="divAventosTypes"></div>
+    <div id="table_result"></div>
+</tr>
+</table>
+
+
+  </body>
+</html>
