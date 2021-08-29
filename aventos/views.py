@@ -39,27 +39,27 @@ class AventosTypeView(APIView):
         listAventosHK_S_TIPON = aventosCalculate.HK_S_TIPON(km2, weightFacade2)
         listAventosHK_XS = aventosCalculate.HK_XS(km2, weightFacade2, width)
         listAventosHK_XS_TIPON = aventosCalculate.HK_XS_TIPON(km2, weightFacade2, width)
-        if listAventosHS != []:
+        if listAventosHS != [] and listAventosHS != None:
             listAventos.update({"HS": listAventosHS})
-        if listAventosHL != []:
+        if listAventosHL != [] and listAventosHL != None:
             listAventos.update({"HL": listAventosHL})
-        if listAventosHF != []:
+        if listAventosHF != [] and listAventosHF != None:
             listAventos.update({"HF": listAventosHF})
-        if listAventosHK_top != []:
+        if listAventosHK_top != [] and listAventosHK_top != None:
             listAventos.update({"HK Top": listAventosHK_top})
-        if listAventosHK_top_TIPON != []:
+        if listAventosHK_top_TIPON != [] and listAventosHK_top_TIPON != None:
             listAventos.update({"HK Top TIP-ON": listAventosHK_top_TIPON})
-        if listAventosHK != []:
+        if listAventosHK != [] and listAventosHK != None:
             listAventos.update({"HK": listAventosHK})
-        if listAventosHK_TIPON != []:
+        if listAventosHK_TIPON != [] and listAventosHK_TIPON != None:
             listAventos.update({"HK TIP-ON": listAventosHK_TIPON})
-        if listAventosHK_S != []:
+        if listAventosHK_S != [] and listAventosHK_S != None:
             listAventos.update({"HK-S": listAventosHK_S})
-        if listAventosHK_S_TIPON != []:
+        if listAventosHK_S_TIPON != [] and listAventosHK_S_TIPON != None:
             listAventos.update({"HK-S TIP-ON": listAventosHK_S_TIPON})
-        if listAventosHK_XS != []:
+        if listAventosHK_XS != [] and listAventosHK_XS != None:
             listAventos.update({"HK-XS": listAventosHK_XS})
-        if listAventosHK_XS_TIPON != []:
+        if listAventosHK_XS_TIPON != [] and listAventosHK_XS_TIPON != None:
             listAventos.update({"HK-XS TIP-ON": listAventosHK_XS_TIPON})
         print(listAventos)
         return Response(listAventos)
