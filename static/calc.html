@@ -1,5 +1,6 @@
 <html>
   <head>
+      <meta CHARSET="utf-8">
       <script type="text/javascript" src="files/jquery-3.6.0.min.js"></script>
       <style>
           .calculator {
@@ -218,10 +219,6 @@
 
         // Запрос к серверу на получение комплектов подемников
         function GetAventosTypesAvalide(plotnost, tolsh, width, height, handleWeightVar) {
-            //$.post("/api/aventos/", {handleWeight: "1", height: "111", thickness: "16", width: "120"})
-            //    .done(function(data) {
-            //        alert("Data Loaded: " + data);
-            //    });
             data = {"handleWeight": handleWeightVar, "height": height, "thickness": tolsh, "width": width, "density": plotnost};
             url = "/api/aventos/"
             $.ajax({
@@ -232,24 +229,32 @@
                     'dataType': 'json',
                     'success': function(response){
                         //alert("Data Loaded: " + JSON.stringify(response));
-                        $("#divAventosTypes").html(JSON.stringify(response))
+
+                        CreateTableToAventosKits(response)
                     }
                 });
+        }
 
-            /*$.post( "/api/aventos/", JSON.stringify({handleWeight: 1, height: 111, thickness: 16, width: 120}), function( data ) {
-                alert("Data Loaded: " + data);
-                }, "json");
-            $.ajax({
-                url:"/api/aventos/",
-                type:"POST",
-                data: data,
-                contentType:"application/json; charset=utf-8",
-                dataType:"json",
-                success: function(response){
-                    alert("Data Loaded: " + response);
+        // Создание таблицы для вариантов комплектов подъемников
+        function CreateTableToAventosKits(response) {
+            var content='<table class="table_result_css">'
+            console.log(response)
+
+            for (var key in response) {
+                content += '<tr><th colspan="2">'+key+'</th></tr>'
+                content +='<tr>'
+                for (index = 0; index < 2; ++index) {
+                    if (response[key][index] === undefined) {
+                        content+='<td>-</td>'
+                    } else {
+                        content+='<td>'+response[key][index]+'</td>'
+                    }
+
                 }
-            })*/
-
+                content += '</tr>'
+            }
+            content += '</table>'
+            $("#divAventosTypes").html(content)
         }
         
         // производит расчет и вывод результата
@@ -272,7 +277,12 @@
             createTableFacadeResult()
 
         }
-
+        function setDefaultValue() {
+            //SetTolsh();
+             $("input[name=tolsh]").val(16);
+             $("input[name=width]").val(0);
+             $("input[name=height]").val(0);
+        }
         
         $(".form_image div").css("display", "none");
         $("#dsp").css("display", "block");
@@ -283,16 +293,18 @@
 
         $(".calculator select").bind("change", function () {
             ShowPictureType();
-            SetTolsh();
-            ShowHideGlassFields();
+            setDefaultValue()
+
+            //ShowHideGlassFields();
             Calculate();
         });
 
         // проводим инициализацию при загрузке страницы
         ShowPictureType();
-        SetTolsh();
+        setDefaultValue();
         ShowHideGlassFields();
-        createTableFacadeResult()
+        Calculate();
+        createTableFacadeResult();
     });
 </script>
 <div class="CalcPad">
@@ -364,7 +376,7 @@
 При выборе силового механизма учитывайте вес ручки<br>
 
 AVENTOS HF, HL, HS + вес ручки<br>
-AVENTOS HR тор, HK-S, HK-XS + двойной вес ручки</td>
+AVENTOS HK, HK-S, HK-XS + двойной вес ручки</td>
 		    </tr>
                 </tbody></table>
             
