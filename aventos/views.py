@@ -28,23 +28,23 @@ class AventosTypeView(APIView):
 
         listAventos = {}
         aventosCalculate = AventosCalculate()
-        listAventosHS = aventosCalculate.HS(weightFacade, height)
-        listAventosHL = aventosCalculate.HL(weightFacade, height)
+        listAventosHS = aventosCalculate.HS(weightFacade, width, height)
+        listAventosHL = aventosCalculate.HL(weightFacade, width, height)
         listAventosHF = aventosCalculate.HF(km, weightFacade, width, height)
-        listAventosHK_top = aventosCalculate.HK_top(km2, weightFacade2)
-        listAventosHK_top_TIPON = aventosCalculate.HK_top_TIPON(km2, weightFacade2)
-        listAventosHK = aventosCalculate.HK(km2, weightFacade2)
-        listAventosHK_TIPON = aventosCalculate.HK_TIPON(km2, weightFacade2)
-        listAventosHK_S = aventosCalculate.HK_S(km2, weightFacade2)
-        listAventosHK_S_TIPON = aventosCalculate.HK_S_TIPON(km2, weightFacade2)
-        listAventosHK_XS = aventosCalculate.HK_XS(km2, weightFacade2, width)
-        listAventosHK_XS_TIPON = aventosCalculate.HK_XS_TIPON(km2, weightFacade2, width)
+        listAventosHK_top = aventosCalculate.HK_top(km2, weightFacade2, width, height)
+        listAventosHK_top_TIPON = aventosCalculate.HK_top_TIPON(km2, weightFacade2, width, height)
+        listAventosHK = aventosCalculate.HK(km2, weightFacade2, width, height)
+        listAventosHK_TIPON = aventosCalculate.HK_TIPON(km2, weightFacade2, width, height)
+        listAventosHK_S = aventosCalculate.HK_S(km2, weightFacade2, width, height)
+        listAventosHK_S_TIPON = aventosCalculate.HK_S_TIPON(km2, weightFacade2, width, height)
+        listAventosHK_XS = aventosCalculate.HK_XS(km2, weightFacade2, width, height)
+        listAventosHK_XS_TIPON = aventosCalculate.HK_XS_TIPON(km2, weightFacade2, width, height)
+        if listAventosHF != [] and listAventosHF != None:
+            listAventos.update({"HF": listAventosHF})
         if listAventosHS != [] and listAventosHS != None:
             listAventos.update({"HS": listAventosHS})
         if listAventosHL != [] and listAventosHL != None:
             listAventos.update({"HL": listAventosHL})
-        if listAventosHF != [] and listAventosHF != None:
-            listAventos.update({"HF": listAventosHF})
         if listAventosHK_top != [] and listAventosHK_top != None:
             listAventos.update({"HK Top": listAventosHK_top})
         if listAventosHK_top_TIPON != [] and listAventosHK_top_TIPON != None:
@@ -67,12 +67,14 @@ class AventosTypeView(APIView):
 class AventosCalculate():
     """Класс расчета и выбора комплекта для подъемников Aventos"""
 
-    def HS(self, weightFacade, height):
+    def HS(self, weightFacade, width, height):
         """
         Фукция возращает комплект подъемника Aventos HS
             weightFacade - Вес фасада
             height - Высота фасада
         """
+        if height < 350 or height > 800 or width > 1800:
+            return []
         listAventos = []
         if height >= 350 and height <= 400:
             if weightFacade >= 2 and weightFacade <= 5:
@@ -158,12 +160,14 @@ class AventosCalculate():
 
         return listAventos
 
-    def HL(self, weightFacade, height):
+    def HL(self, weightFacade, width, height):
         """
         Фукция возращает комплект подъемника Aventos HL
             weightFacade - Вес фасада
             height - Высота фасада
         """
+        if height < 300 or height > 580 or width > 1800:
+            return []
         listAventos = []
         if height >= 300 and height <= 350:
             if weightFacade >= 1.25 and weightFacade <= 4.25:
@@ -212,6 +216,8 @@ class AventosCalculate():
                 weight - ширина фасада
                 height - Высота фасада
         """
+        if height < 480 or height > 1040 or width > 1800:
+            return []
         listAventos = []
         hinge = 2
         if width >= 1200 and width < 1800:
@@ -253,93 +259,107 @@ class AventosCalculate():
 
         return listAventos
 
-    def HK_top(self, km, weightFacade):
+    def HK_top(self, km, weightFacade, width, height):
+        if height < 205 or height > 600 or width > 1800:
+            return []
         listAventos = []
         if weightFacade > 18:
             return []
         if km >= 420 and km <= 1610:
-            listAventos.append("HTE1 или HTS1")
+            listAventos.append("HTS1")
         if km >= 930 and km <= 2800:
-            listAventos.append("HTE2 или HTS2")
+            listAventos.append("HTS2")
         if km >= 1730 and km <= 5200:
-            listAventos.append("HTE3 или HTS3")
+            listAventos.append("HTS3")
         if km >= 3200 and km <= 9000:
-            listAventos.append("HTE4 или HTS4")
+            listAventos.append("HTS4")
 
         return listAventos
 
-    def HK_top_TIPON(self, km, weightFacade):
+    def HK_top_TIPON(self, km, weightFacade, width, height):
+        if height < 205 or height > 600 or width > 1800:
+            return []
         listAventos = []
         if weightFacade > 18:
             return []
         if km >= 420 and km <= 1610:
-            listAventos.append("HTTE1 или HTTS1")
+            listAventos.append("HTTS1")
         if km >= 930 and km <= 2800:
-            listAventos.append("HTTE2 или HTTS2")
+            listAventos.append("HTTS2")
         if km >= 1730 and km <= 5200:
-            listAventos.append("HTTE3 или HTTS3")
+            listAventos.append("HTTS3")
         if km >= 3200 and km <= 9000:
-            listAventos.append("HTTE4 или HTTS4")
+            listAventos.append("HTTS4")
 
         return listAventos
 
-    def HK(self, km, weightFacade):
+    def HK(self, km, weightFacade, width, height):
+        if height < 205 or height > 600 or width > 1800:
+            return []
         listAventos = []
         if weightFacade > 18:
             return []
         if km >= 480 and km <= 1500:
-            listAventos.append("HK1 или HKA1")
+            listAventos.append("HK1")
         if km >= 750 and km <= 2500:
-            listAventos.append("HK2 или HKA2")
+            listAventos.append("HK2")
         if km >= 1500 and km <= 4900:
-            listAventos.append("HK3 или HKA3")
+            listAventos.append("HK3")
         if km >= 3200 and km <= 9000:
-            listAventos.append("HK4 или HKA4")
+            listAventos.append("HK4")
         return listAventos
 
-    def HK_TIPON(self, km, weightFacade):
+    def HK_TIPON(self, km, weightFacade, width, height):
+        if height < 205 or height > 600 or width > 1800:
+            return []
         listAventos = []
         if weightFacade > 18:
             return []
         if km >= 480 and km <= 1500:
-            listAventos.append("HKT1 или HKTA1")
+            listAventos.append("HKT1")
         if km >= 750 and km <= 2500:
-            listAventos.append("HKT2 или HKTA2")
+            listAventos.append("HKT2")
         if km >= 1500 and km <= 4900:
-            listAventos.append("HKT3 или HKTA3")
+            listAventos.append("HKT3")
         if km >= 3200 and km <= 9000:
-            listAventos.append("HKT4 или HKTA4")
+            listAventos.append("HKT4")
         return listAventos
 
-    def HK_S(self, km, weightFacade):
+    def HK_S(self, km, weightFacade, width, height):
+        if height < 180 or height > 600 or width > 1800:
+            return []
         listAventos = []
         if weightFacade > 18:
             return []
         if km >= 220 and km <= 500:
-            listAventos.append("HKS1 или HKSA1")
+            listAventos.append("HKS1")
         if km >= 400 and km <= 1000:
-            listAventos.append("HKS2 или HKSA2")
+            listAventos.append("HKS2")
         if km >= 680 and km <= 1520:
-            listAventos.append("HKS3 или HKSA3")
+            listAventos.append("HKS3")
         if km >= 960 and km <= 2215:
-            listAventos.append("HKS4 или HKSA4")
+            listAventos.append("HKS4")
         return listAventos
 
-    def HK_S_TIPON(self, km, weightFacade):
+    def HK_S_TIPON(self, km, weightFacade, width, height):
+        if height < 180 or height > 600 or width > 1800:
+            return []
         listAventos = []
         if weightFacade > 18:
             return []
         if km >= 220 and km <= 500:
-            listAventos.append("HKST1 или HKSTA1")
+            listAventos.append("HKST1")
         if km >= 400 and km <= 1000:
-            listAventos.append("HKST2 или HKSTA2")
+            listAventos.append("HKST2")
         if km >= 680 and km <= 1520:
-            listAventos.append("HKST3 или HKSTA3")
+            listAventos.append("HKST3")
         if km >= 960 and km <= 2215:
-            listAventos.append("HKST4 или HKSTA4")
+            listAventos.append("HKST4")
         return listAventos
 
-    def HK_XS(self, km, weightFacade, width):
+    def HK_XS(self, km, weightFacade, width, height):
+        if height < 240 or height > 600 or width > 1800:
+            return []
         hinge = 2
         if width >= 900 and width < 1200:
             hinge = 3
@@ -367,7 +387,9 @@ class AventosCalculate():
 
         return listAventos
 
-    def HK_XS_TIPON(self, km, weightFacade, width):
+    def HK_XS_TIPON(self, km, weightFacade, width, height):
+        if height < 240 or height > 600 or width > 1800:
+            return []
         hinge = 2
         if width >= 900 and width < 1200:
             hinge = 3
