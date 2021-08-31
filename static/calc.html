@@ -47,7 +47,7 @@
           }
 
           .calculator td input {
-              width: 70px !important;
+              width: 80px !important;
               border: 1px solid #999;
           }
 
@@ -66,7 +66,7 @@
           }
 
           .PlotnostSel {
-              width: 163px;
+              width: 80px;
           }
 
           .ForStCalc {
@@ -94,18 +94,9 @@
     $(function () {
         var PlotnArray = Array();
 
-        PlotnArray[0] = {'PLOTN': 0.76, 'NAME': 'МДФ', 'USE_GLASS': false, 'PICTURE_ID': 'mdf'};
-        PlotnArray[1] = {'PLOTN': 0.68, 'NAME': 'ДСП', 'USE_GLASS': false, 'PICTURE_ID': 'dsp'};
-        //PlotnArray[1] = {'PLOTN': 2.5, 'NAME': 'СТЕКЛО', 'USE_GLASS': false, 'PICTURE_ID': 'glass'};
-        //PlotnArray[2] = {'PLOTN': 0.76, 'NAME': 'МДФ', 'USE_GLASS': false, 'PICTURE_ID': 'mdf'};
-        //PlotnArray[3] = {'PLOTN': 0.76, 'NAME': 'МДФ', 'USE_GLASS': true, 'PICTURE_ID': 'mdf_glass'};
-        //PlotnArray[4] = {'PLOTN': 0.68, 'NAME': 'ДСП', 'USE_GLASS': true, 'PICTURE_ID': 'dsp_glass'};
+        PlotnArray[0] = {'PLOTN': 760, 'NAME': 'МДФ', 'USE_GLASS': false, 'PICTURE_ID': 'mdf'};
+        PlotnArray[1] = {'PLOTN': 680, 'NAME': 'ДСП', 'USE_GLASS': false, 'PICTURE_ID': 'dsp'};
 
-        //PlotnArray[5] = {'PLOTN': 0.68, 'NAME': 'Массив бука', 'USE_GLASS': false, 'PICTURE_ID': 'mas_buk'};
-        //PlotnArray[6] = {'PLOTN': 0.69, 'NAME': 'Массив дуба', 'USE_GLASS': false, 'PICTURE_ID': 'mas_dub'};
-        //PlotnArray[7] = {'PLOTN': 0.56, 'NAME': 'Массив ольхи', 'USE_GLASS': false, 'PICTURE_ID': 'mas_olha'};
-        //PlotnArray[8] = {'PLOTN': 0.52, 'NAME': 'Массив сосны', 'USE_GLASS': false, 'PICTURE_ID': 'mas_sosna'};
-        //PlotnArray[9] = {'PLOTN': 0.83, 'NAME': 'Массив акации', 'USE_GLASS': false, 'PICTURE_ID': 'mas_akatcia'};
         var handleWeight = Array();
         handleWeight[0] = {'name': 'Not handle', 'handleWeight': 0}
         handleWeight[1] = {'name': 'Min handle', 'handleWeight': 0.1}
@@ -153,21 +144,23 @@
 
         // расчитывает вес материала
         function CalculateMaterial() {
-            var plotnost = parseFloat($("select[name=plotnost]").val().toString().replace(/,/, "."));
+            //var plotnost = parseFloat($("select[name=plotnost]").val().toString().replace(/,/, "."));
+            var plotnost = parseFloat($("input[name=plotnostInput]").val().toString().replace(/,/, "."));
             var tolsh = parseFloat($("input[name=tolsh]").val().toString().replace(/,/, "."));
             var width = parseFloat($("input[name=width]").val().toString().replace(/,/, "."));
             var height = parseFloat($("input[name=height]").val().toString().replace(/,/, "."));
 	        var handleWeightVar = parseFloat($("select[name=handleWeight]").val().toString().replace(/,/, "."));
             var ves = 0;
 
-            ves = parseFloat((tolsh * width * height / 1000000) * PlotnArray[plotnost]['PLOTN']);
+            ves = parseFloat((tolsh / 1000) * (width / 1000) * (height / 1000) * plotnost);
 	        ves += handleWeight[handleWeightVar]['handleWeight']
-            GetAventosTypesAvalide(PlotnArray[plotnost]['PLOTN'], tolsh, width, height, handleWeightVar)
+            GetAventosTypesAvalide(plotnost, tolsh, width, height, handleWeightVar)
             return ves;
         }
         // Мой расчитывает вес материала
         function CalculateMaterialMy(height, width) {
-            var plotnost = parseFloat($("select[name=plotnost]").val().toString().replace(/,/, "."));
+            //var plotnost = parseFloat($("select[name=plotnost]").val().toString().replace(/,/, "."));
+            var plotnost = parseFloat($("input[name=plotnostInput]").val().toString().replace(/,/, "."));
             var tolsh = parseFloat($("input[name=tolsh]").val().toString().replace(/,/, "."));
             var handleWeightVar = parseFloat($("select[name=handleWeight]").val().toString().replace(/,/, "."));
 
@@ -175,7 +168,7 @@
             //var my_height = parseFloat($("input[name=height]").val().toString().replace(/,/, "."));
             var ves = 0;
 
-            ves = parseFloat((tolsh / 1000) * (width / 1000) * (height / 1000) * (PlotnArray[plotnost]['PLOTN']*1000));
+            ves = parseFloat((tolsh / 1000) * (width / 1000) * (height / 1000) * plotnost);
 	        ves += handleWeight[handleWeightVar]['handleWeight']
             return ves;
         }
@@ -279,6 +272,8 @@
         }
         function setDefaultValue() {
             SetTolsh();
+            var plotnost = parseFloat($("select[name=plotnost]").val().toString().replace(/,/, "."));
+            $("input[name=plotnostInput]").val(PlotnArray[plotnost]['PLOTN']);
             //$("input[name=tolsh]").val(16);
             //$("input[name=width]").val(0);
             //$("input[name=height]").val(0);
@@ -292,8 +287,10 @@
         })
 
         $(".calculator select").bind("change", function () {
-            ShowPictureType();
-            setDefaultValue()
+            var plotnost = parseFloat($("select[name=plotnost]").val().toString().replace(/,/, "."));
+            $("input[name=plotnostInput]").val(PlotnArray[plotnost]['PLOTN']);
+            //ShowPictureType();
+            //setDefaultValue()
 
             //ShowHideGlassFields();
             Calculate();
@@ -312,42 +309,23 @@
 
                 <table class="calculator">
                     <tbody><tr>
-                        <th colspan="3" align="center">Расчет веса двери</th>
+                        <th colspan="2">Расчет веса фасада</th>
                     </tr>
                     <tr>
-                        <td class="head">Материал фасада</td>
-                        <td colspan="2">
+                        <td class="head">Материал фасада, кг/м3</td>
+                        <td>
                             <select name="plotnost" class="PlotnostSel">
                                 <option value="0">МДФ</option>
                                 <option value="1">ДСП</option>
                             </select>
+                            <input type="text" name="plotnostInput" value="0">
                         </td>
                     </tr>
-                </tbody></table>
-
-                <br>
-                <table class="calculator redHeader" style="visibility: hidden;">
-                    <tbody><tr>
-                        <td class="head">&nbsp;</td>
-                        <td class="materialHeader">МДФ</td>
-                        <td>Стекло</td>
-                    </tr>
-                </tbody></table>
-
-                <table class="calculator">
-                    <tbody><tr>
+                    <tr>
                         <td class="head">Толщина, мм</td>
-                        <td width="65"><input type="text" name="tolsh" value="19"></td>
+                        <td><input type="text" name="tolsh" value="19"></td>
                     </tr>
-                    <tr>
-                        <td class="head">Ширина, мм</td>
-                        <td width="65"><input type="text" name="width" value="0"></td>
-                    </tr>
-                    <tr>
-                        <td class="head">Высота, мм</td>
-                        <td width="65"><input type="text" name="height" value="0"></td>
-                    </tr>
- 		    <tr>
+                     <tr>
                         <td class="head">Вес ручки, кг</td>
                         <td>
                             <select name="handleWeight" class="handleWeightClass">
@@ -360,6 +338,14 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="head">Высота, мм</td>
+                        <td><input type="text" name="height" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td class="head">Ширина, мм</td>
+                        <td><input type="text" name="width" value="0"></td>
+                    </tr>
+                    <tr>
                         <td class="head">Вес двери, кг</td>
                         <td class="result">0.00</td>
                     </tr>
@@ -367,18 +353,17 @@
                         <td class="head">Коэффициент мощности, кг</td>
                         <td class="result_km">0</td>
                     </tr>
-		    <tr>
-                        <td colspan=3 class="head">Расчет веса фасадов (м) х Ширина фасада (м) х Толщина фасадов х Плотность(кг/м3)<br>
-<span class="red_text">Калькулятор носит рекомендательный характер!!!</span><br>
-Точный вес фасадов из различных материалов определяется взвешиванием.<br>
-
-
-При выборе силового механизма учитывайте вес ручки<br>
-
-AVENTOS HF, HL, HS + вес ручки<br>
-AVENTOS HK, HK-S, HK-XS + двойной вес ручки</td>
-		    </tr>
+                    <tr>
+                        <td colspan=2 class="head">
+                            Расчет веса фасадов (м) х Ширина фасада (м) х Толщина фасадов х Плотность(кг/м3)<br>
+                            <span class="red_text">Калькулятор носит рекомендательный характер!!!</span><br>
+                            Точный вес фасадов из различных материалов определяется взвешиванием.<br>
+                            При выборе силового механизма учитывайте вес ручки<br>
+                            AVENTOS HF, HL, HS + вес ручки<br>
+                            AVENTOS HK, HK-S, HK-XS + двойной вес ручки</td>
+		            </tr>
                 </tbody></table>
+
             
     
 </div>
