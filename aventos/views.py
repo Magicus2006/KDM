@@ -19,7 +19,7 @@ class AventosTypeView(APIView):
         handleWeight = request.data.get('handleWeight') # Вес ручки
         density = request.data.get('density') # Плотность
 
-        weightFacade = (width/1000) * (height/1000) * (thickness/1000) * (density*1000)
+        weightFacade = (width/1000) * (height/1000) * (thickness/1000) * density
         weightFacade += handleWeight
         weightFacade2 = weightFacade + handleWeight
         weightFacade = round(weightFacade,2)
