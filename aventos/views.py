@@ -46,21 +46,21 @@ class AventosTypeView(APIView):
         if listAventosHL != [] and listAventosHL != None:
             listAventos.update({"HL": listAventosHL})
         if listAventosHK_top != [] and listAventosHK_top != None:
-            listAventos.update({"HK Top": listAventosHK_top})
-        if listAventosHK_top_TIPON != [] and listAventosHK_top_TIPON != None:
-            listAventos.update({"HK Top TIP-ON": listAventosHK_top_TIPON})
+            listAventos.update({"HK Top (TIP-ON)": listAventosHK_top})
+        #if listAventosHK_top_TIPON != [] and listAventosHK_top_TIPON != None:
+        #    listAventos.update({"HK Top TIP-ON": listAventosHK_top_TIPON})
         if listAventosHK != [] and listAventosHK != None:
-            listAventos.update({"HK": listAventosHK})
-        if listAventosHK_TIPON != [] and listAventosHK_TIPON != None:
-            listAventos.update({"HK TIP-ON": listAventosHK_TIPON})
+            listAventos.update({"HK (TIP-ON)": listAventosHK})
+        #if listAventosHK_TIPON != [] and listAventosHK_TIPON != None:
+        #    listAventos.update({"HK TIP-ON": listAventosHK_TIPON})
         if listAventosHK_S != [] and listAventosHK_S != None:
-            listAventos.update({"HK-S": listAventosHK_S})
-        if listAventosHK_S_TIPON != [] and listAventosHK_S_TIPON != None:
-            listAventos.update({"HK-S TIP-ON": listAventosHK_S_TIPON})
+            listAventos.update({"HK-S (TIP-ON)": listAventosHK_S})
+        #if listAventosHK_S_TIPON != [] and listAventosHK_S_TIPON != None:
+        #    listAventos.update({"HK-S TIP-ON": listAventosHK_S_TIPON})
         if listAventosHK_XS != [] and listAventosHK_XS != None:
-            listAventos.update({"HK-XS": listAventosHK_XS})
-        if listAventosHK_XS_TIPON != [] and listAventosHK_XS_TIPON != None:
-            listAventos.update({"HK-XS TIP-ON": listAventosHK_XS_TIPON})
+            listAventos.update({"HK-XS (TIP-ON)": listAventosHK_XS})
+        #if listAventosHK_XS_TIPON != [] and listAventosHK_XS_TIPON != None:
+        #    listAventos.update({"HK-XS TIP-ON": listAventosHK_XS_TIPON})
         print(listAventos)
         return Response(listAventos)
 
@@ -266,13 +266,13 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 420 and km <= 1610:
-            listAventos.append("HTS1")
+            listAventos.append("HTS1 (HTTS1)")
         if km >= 930 and km <= 2800:
-            listAventos.append("HTS2")
+            listAventos.append("HTS2 (HTTS2)")
         if km >= 1730 and km <= 5200:
-            listAventos.append("HTS3")
+            listAventos.append("HTS3 (HTTS3)")
         if km >= 3200 and km <= 9000:
-            listAventos.append("HTS4")
+            listAventos.append("HTS4 (HTTS4)")
 
         return listAventos
 
@@ -300,13 +300,13 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 480 and km <= 1500:
-            listAventos.append("HK1")
+            listAventos.append("HK1 (HKT1)")
         if km >= 750 and km <= 2500:
-            listAventos.append("HK2")
+            listAventos.append("HK2 (HKT2)")
         if km >= 1500 and km <= 4900:
-            listAventos.append("HK3")
+            listAventos.append("HK3 (HKT3)")
         if km >= 3200 and km <= 9000:
-            listAventos.append("HK4")
+            listAventos.append("HK4 (HKT4)")
         return listAventos
 
     def HK_TIPON(self, km, weightFacade, width, height):
@@ -332,13 +332,13 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 220 and km <= 500:
-            listAventos.append("HKS1")
+            listAventos.append("HKS1 (HKST1)")
         if km >= 400 and km <= 1000:
-            listAventos.append("HKS2")
+            listAventos.append("HKS2 (HKST2)")
         if km >= 680 and km <= 1520:
-            listAventos.append("HKS3")
+            listAventos.append("HKS3 (HKST3)")
         if km >= 960 and km <= 2215:
-            listAventos.append("HKS4")
+            listAventos.append("HKS4 (HKST4)")
         return listAventos
 
     def HK_S_TIPON(self, km, weightFacade, width, height):
@@ -373,17 +373,17 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 200 and km <= 1000:
-            listAventos.append("HXS1-"+str(hinge))
+            listAventos.append("HXS1-"+str(hinge)+" (HXS1T-"+str(hinge)+")")
         if km >= 500 and km <= 1500:
-            listAventos.append("HXS2-"+str(hinge))
+            listAventos.append("HXS2-"+str(hinge)+" (HXS2T-"+str(hinge)+")")
         if km >= 800 and km <= 1800:
-            listAventos.append("HXS3-"+str(hinge))
+            listAventos.append("HXS3-"+str(hinge)+" (HXS3T-" + str(hinge) + ")")
         if km >= 400 and km <= 2000:
-            listAventos.append("HXS4-"+str(hinge))
+            listAventos.append("HXS4-"+str(hinge)+" (HXS4T-"+str(hinge)+")")
         if km >= 1000 and km <= 3000:
-            listAventos.append("HXS5-"+str(hinge))
+            listAventos.append("HXS5-"+str(hinge)+" (HXS5T-"+str(hinge)+")")
         if km >= 1600 and km <= 3600:
-            listAventos.append("HXS6-"+str(hinge))
+            listAventos.append("HXS6-"+str(hinge)+" (HXS6T-"+str(hinge)+")")
 
         return listAventos
 
