@@ -223,7 +223,8 @@
                     'success': function(response){
                         //alert("Data Loaded: " + JSON.stringify(response));
 
-                        CreateTableToAventosKits(response)
+                        //CreateTableToAventosKits(response)
+                        CreateTableToAventosKits2(response)
                     }
                 });
         }
@@ -254,6 +255,69 @@
             }
             content += '</table>'
             $("#divAventosTypes").html(content)
+        }
+        // Создание таблицы для вариантов комплектов подъемников VER 2
+        function CreateTableToAventosKits2(response) {
+            var content='<table class="table_result_css">'
+            content += '<tr><th>Aventos</th><th>Комплект</th> <th>Цена</th></tr>'
+            for (var kit in response) {
+                console.log(kit, " len", response[kit].length)
+                if(response[kit].length > 1) {
+                    for (var index = 0; index < response[kit].length; ++index) {
+                        var nameAventos = response[kit][index]["name"]
+                        var costAventos = response[kit][index]["cost"]
+                        content+='<tr>'
+                        if( index == 0) {
+                            content+='<th rowspan="'+response[kit].length+'">'
+                            content+= kit
+                            content+='</th>'
+                        }
+                        content+='<td>'
+                        content+= nameAventos
+                        content+='</td>'
+                        content+='<td>'
+                        content+= costAventos
+                        content+='€</td>'
+                        content+='</tr>'
+                    }
+                } else {
+                    var index = 0
+                    var nameAventos = response[kit][index]["name"]
+                    var costAventos = response[kit][index]["cost"]
+                    content+='<tr>'
+                    content+='<th>'
+                    content+= kit
+                    content+='</th>'
+                    content+='<td>'
+                    content+= nameAventos
+                    content+='</td>'
+                    content+='<td>'
+                    content+= costAventos
+                    content+='€</td>'
+                    content+='</tr>'
+                }
+            }
+            /*for (var key in response) {
+                content += '<tr><th colspan="4">'+key+'</th></tr>'
+                content +='<tr>'
+                for (index = 0; index < 2; ++index) {
+                    if (response[key][index] === undefined) {
+                        content+='<td>-</td><td>-</td>'
+                    } else {
+
+                        if (response[key][index] !== undefined) {
+                            var nameAventos = response[key][index]["name"]
+                            var costAventos = response[key][index]["cost"]
+                            console.log("nameAventos:"+nameAventos+"costAventos"+costAventos)
+                            content+='<td>'+nameAventos+'</td><td>'+costAventos+'€</td>'
+                        }
+                    }
+
+                }
+                content += '</tr>'
+            }*/
+            content += '</table>'
+            $("#divAventosTypesV2").html(content)
         }
         
         // производит расчет и вывод результата
@@ -377,22 +441,8 @@
     <div id="divAventosTypes"></div>
     <!-- h2>Таблица для подбора коэффициента мощности вручную.</h2>
     <div id="table_result"></div-->
-     <div id="divAventosTypesV2">
-         <table class="table_result_css">
-             <tbody>
-             <tr>
-                 <th>Aventos</th>
-                 <th>Комплект</th>
-                 <th>Цена</th>
-             </tr>
-             <tr>
-                 <th>Aventos HS</th>
-                 <td>HS1</td>
-                 <td>135.10</td>
-             </tr>
-             </tbody>
-         </table>
-     </div>
+    <div id="divAventosTypesV2"></div>
+
 </tr>
 </table>
 
