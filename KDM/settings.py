@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     #'article',
     #'nomenclatura',
-    'aventos'
+    'aventos',
+    'aventos2'
 ]
 
 MIDDLEWARE = [
