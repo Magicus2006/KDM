@@ -78,83 +78,83 @@ class AventosCalculate():
         listAventos = []
         if height >= 350 and height <= 400:
             if weightFacade >= 2 and weightFacade <= 5:
-                listAventos.append("HS1")
+                listAventos.append({"name": "HS1", "cost": 131.36}) # HS1
             if weightFacade >= 4.25 and weightFacade <= 9.50:
-                listAventos.append("HS2")
+                listAventos.append({"name": "HS2", "cost": 131.36}) # HS2
             if weightFacade >= 8.75 and weightFacade <= 12:
-                listAventos.append("HS3")
+                listAventos.append({"name": "HS3", "cost": 131.36}) # HS3
         elif height >= 401 and height <= 450:
             if weightFacade >= 2 and weightFacade <= 4.75:
-                listAventos.append("HS1")
+                listAventos.append({"name": "HS1", "cost": 131.36})
             if weightFacade >= 4 and weightFacade <= 9:
-                listAventos.append("HS2")
+                listAventos.append({"name": "HS2", "cost": 131.36})
             if weightFacade >= 8.25 and weightFacade <= 13.50:
-                listAventos.append("HS3")
+                listAventos.append({"name": "HS3", "cost": 131.36})
         elif height >= 451 and height <= 500:
             if weightFacade >= 2.50 and weightFacade <= 4.25:
-                listAventos.append("HS1")
+                listAventos.append({"name": "HS1", "cost": 131.36})
             if weightFacade >= 3.50 and weightFacade <= 8.50:
-                listAventos.append("HS2")
+                listAventos.append({"name": "HS2", "cost": 131.36})
             if weightFacade >= 7.50 and weightFacade <= 14.75:
-                listAventos.append("HS3")
+                listAventos.append({"name": "HS3", "cost": 131.36})
         elif height >= 501 and height <= 525:
             if weightFacade >= 2.50 and weightFacade <= 4.25:
-                listAventos.append("HS1")
+                listAventos.append({"name": "HS1", "cost": 131.36})
             if weightFacade >= 3.25 and weightFacade <= 7.75:
-                listAventos.append("HS2")
+                listAventos.append({"name": "HS2", "cost": 131.36})
             if weightFacade >= 7.25 and weightFacade <= 15.0:
-                listAventos.append("HS3")
+                listAventos.append({"name": "HS3", "cost": 131.36})
 
         elif height >= 526 and height <= 550:
             if weightFacade >= 3 and weightFacade <= 6.75:
-                listAventos.append("HS4")
+                listAventos.append({"name": "HS4", "cost": 131.36})
             if weightFacade >= 6 and weightFacade <= 13:
-                listAventos.append("HS5")
+                listAventos.append({"name": "HS5", "cost": 131.36})
             if weightFacade >= 11.50 and weightFacade <= 17.25:
-                listAventos.append("HS5")
+                listAventos.append({"name": "HS5", "cost": 131.36})
         elif height >= 551 and height <= 600:
             if weightFacade >= 3 and weightFacade <= 6.5:
-                listAventos.append("HS4")
+                listAventos.append({"name": "HS4", "cost": 131.36})
             if weightFacade >= 5.5 and weightFacade <= 12.5:
-                listAventos.append("HS5")
+                listAventos.append({"name": "HS5", "cost": 131.36})
             if weightFacade >= 10.5 and weightFacade <= 18.5:
-                listAventos.append("HS5")
+                listAventos.append({"name": "HS5", "cost": 131.36})
         elif height >= 601 and height <= 650:
             if weightFacade >= 3 and weightFacade <= 6:
-                listAventos.append("HS4")
+                listAventos.append({"name": "HS4", "cost": 131.36})
             if weightFacade >= 5.25 and weightFacade <= 11.75:
-                listAventos.append("HS5")
+                listAventos.append({"name": "HS5", "cost": 131.36})
             if weightFacade >= 10 and weightFacade <= 19:
-                listAventos.append("HS5")
+                listAventos.append({"name": "HS5", "cost": 131.36})
         elif height >= 651 and height <= 675:
             if weightFacade >= 3 and weightFacade <= 5.5:
-                listAventos.append("HS4")
+                listAventos.append({"name": "HS4", "cost": 131.36})
             if weightFacade >= 5 and weightFacade <= 11.25:
-                listAventos.append("HS5")
+                listAventos.append({"name": "HS5", "cost": 131.36})
             if weightFacade >= 9.75 and weightFacade <= 19:
-                listAventos.append("HS5")
+                listAventos.append({"name": "HS5", "cost": 131.36})
 
         elif height >= 676 and height <= 700:
             if weightFacade >= 3.50 and weightFacade <= 8:
-                listAventos.append("HS7")
+                listAventos.append({"name": "HS7", "cost": 131.36})
             if weightFacade >= 6.75 and weightFacade <= 13.50:
-                listAventos.append("HS8")
+                listAventos.append({"name": "HS8", "cost": 131.36})
             if weightFacade >= 12.50 and weightFacade <= 21.50:
-                listAventos.append("HS9")
+                listAventos.append({"name": "HS9", "cost": 131.36})
         elif height >= 701 and height <= 750:
             if weightFacade >= 3.50 and weightFacade <= 7.75:
-                listAventos.append("HS7")
+                listAventos.append({"name": "HS7", "cost": 131.36})
             if weightFacade >= 6.5 and weightFacade <= 13.25:
-                listAventos.append("HS8")
+                listAventos.append({"name": "HS8", "cost": 131.36})
             if weightFacade >= 11.5 and weightFacade <= 21.50:
-                listAventos.append("HS9")
+                listAventos.append({"name": "HS9", "cost": 131.36})
         elif height >= 750 and height <= 800:
             if weightFacade >= 3.50 and weightFacade <= 7.25:
-                listAventos.append("HS7")
+                listAventos.append({"name": "HS7", "cost": 131.36})
             if weightFacade >= 6 and weightFacade <= 12.75:
-                listAventos.append("HS8")
+                listAventos.append({"name": "HS8", "cost": 131.36})
             if weightFacade >= 10.50 and weightFacade <= 20.50:
-                listAventos.append("HS9")
+                listAventos.append({"name": "HS9", "cost": 131.36})
         else:
             listAventos = None
 
@@ -171,40 +171,40 @@ class AventosCalculate():
         listAventos = []
         if height >= 300 and height <= 350:
             if weightFacade >= 1.25 and weightFacade <= 4.25:
-                listAventos.append("HL01")
+                listAventos.append({"name": "HL01", "cost": 131.36})
             if weightFacade >= 3.5 and weightFacade <= 7.25:
-                listAventos.append("HL02")
+                listAventos.append({"name": "HL02", "cost": 131.36})
             if weightFacade >= 6.50 and weightFacade <= 12:
-                listAventos.append("HL03")
+                listAventos.append({"name": "HL03", "cost": 131.36})
             if weightFacade >= 11 and weightFacade <= 20:
-                listAventos.append("HL04")
+                listAventos.append({"name": "HL04", "cost": 131.36})
         elif height >= 351 and height <= 400:
             if weightFacade >= 1.25 and weightFacade <= 2.5:
-                listAventos.append("HL05")
+                listAventos.append({"name": "HL05", "cost": 131.36})
             if weightFacade >= 1.75 and weightFacade <= 5:
-                listAventos.append("HL06")
+                listAventos.append({"name": "HL06", "cost": 131.36})
             if weightFacade >= 4.25 and weightFacade <= 9:
-                listAventos.append("HL07")
+                listAventos.append({"name": "HL07", "cost": 131.36})
             if weightFacade >= 8 and weightFacade <= 14.75:
-                listAventos.append("HL08")
+                listAventos.append({"name": "HL08", "cost": 131.36})
             if weightFacade >= 13.50 and weightFacade <= 20:
-                listAventos.append("HL09")
+                listAventos.append({"name": "HL09", "cost": 131.36})
         elif height >= 401 and height <= 550:
             if weightFacade >= 1.75 and weightFacade <= 3.50:
-                listAventos.append("HL10")
+                listAventos.append({"name": "HL10", "cost": 131.36})
             if weightFacade >= 2.75 and weightFacade <= 6.75:
-                listAventos.append("HL11")
+                listAventos.append({"name": "HL11", "cost": 131.36})
             if weightFacade >= 5.75 and weightFacade <= 11.75:
-                listAventos.append("HL12")
+                listAventos.append({"name": "HL12", "cost": 131.36})
             if weightFacade >= 10.5 and weightFacade <= 20:
-                listAventos.append("HL13")
+                listAventos.append({"name": "HL13", "cost": 131.36})
         elif height >= 450 and height <= 580:
             if weightFacade >= 2 and weightFacade <= 5.25:
-                listAventos.append("HS1")
+                listAventos.append({"name": "HS1", "cost": 131.36})
             if weightFacade >= 4.25 and weightFacade <= 9.25:
-                listAventos.append("HS2")
+                listAventos.append({"name": "HS2", "cost": 131.36})
             if weightFacade >= 8.25 and weightFacade <= 16.50:
-                listAventos.append("HS3")
+                listAventos.append({"name": "HS3", "cost": 131.36})
         else:
             listAventos = None
         return listAventos
@@ -231,31 +231,31 @@ class AventosCalculate():
 
         if km >= 2600 and km <= 5500:
             if height >= 480 and height <= 570:
-                listAventos.append("HF01-"+str(hinge))
+                listAventos.append({"name": "HF01-"+str(hinge), "cost": 131.36})
             if height >= 560 and height <= 710:
-                listAventos.append("HF04-"+str(hinge))
+                listAventos.append({"name": "HF04-"+str(hinge), "cost": 131.36})
             if height >= 700 and height <= 900:
-                listAventos.append("HF07-"+str(hinge))
+                listAventos.append({"name": "HF07-"+str(hinge), "cost": 131.36})
             if height >= 760 and height <= 1040:
-                listAventos.append("HF10-"+str(hinge))
+                listAventos.append({"name": "HF10-"+str(hinge), "cost": 131.36})
         if km >= 5350 and km <= 10150:
             if height >= 480 and height <= 570:
-                listAventos.append("HF02-"+str(hinge))
+                listAventos.append({"name": "HF02-"+str(hinge), "cost": 131.36})
             if height >= 560 and height <= 710:
-                listAventos.append("HF05-"+str(hinge))
+                listAventos.append({"name": "HF05-"+str(hinge), "cost": 131.36})
             if height >= 700 and height <= 900:
-                listAventos.append("HF08-"+str(hinge))
+                listAventos.append({"name": "HF08-"+str(hinge), "cost": 131.36})
             if height >= 760 and height <= 1040:
-                listAventos.append("HF11-"+str(hinge))
+                listAventos.append({"name": "HF11-"+str(hinge), "cost": 131.36})
         if km >= 9000 and km <= 17250:
             if height >= 480 and height <= 570:
-                listAventos.append("HF03-"+str(hinge))
+                listAventos.append({"name": "HF03-"+str(hinge), "cost": 131.36})
             if height >= 560 and height <= 710:
-                listAventos.append("HF06-"+str(hinge))
+                listAventos.append({"name": "HF06-"+str(hinge), "cost": 131.36})
             if height >= 700 and height <= 900:
-                listAventos.append("HF09-"+str(hinge))
+                listAventos.append({"name": "HF09-"+str(hinge), "cost": 131.36})
             if height >= 760 and height <= 1040:
-                listAventos.append("HF12-"+str(hinge))
+                listAventos.append({"name": "HF12-"+str(hinge), "cost": 131.36})
 
         return listAventos
 
@@ -266,13 +266,13 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 420 and km <= 1610:
-            listAventos.append("HTS1 (HTTS1)")
+            listAventos.append({"name": "HTS1", "cost": 131.36})
         if km >= 930 and km <= 2800:
-            listAventos.append("HTS2 (HTTS2)")
+            listAventos.append({"name": "HTS2", "cost": 131.36})
         if km >= 1730 and km <= 5200:
-            listAventos.append("HTS3 (HTTS3)")
+            listAventos.append({"name": "HTS3", "cost": 131.36})
         if km >= 3200 and km <= 9000:
-            listAventos.append("HTS4 (HTTS4)")
+            listAventos.append({"name": "HTS4", "cost": 131.36})
 
         return listAventos
 
@@ -283,13 +283,13 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 420 and km <= 1610:
-            listAventos.append("HTTS1")
+            listAventos.append({"name": "HTTS1", "cost": 131.36})
         if km >= 930 and km <= 2800:
-            listAventos.append("HTTS2")
+            listAventos.append({"name": "HTTS2", "cost": 131.36})
         if km >= 1730 and km <= 5200:
-            listAventos.append("HTTS3")
+            listAventos.append({"name": "HTTS3", "cost": 131.36})
         if km >= 3200 and km <= 9000:
-            listAventos.append("HTTS4")
+            listAventos.append({"name": "HTTS4", "cost": 131.36})
 
         return listAventos
 
@@ -300,13 +300,13 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 480 and km <= 1500:
-            listAventos.append("HK1 (HKT1)")
+            listAventos.append({"name": "HK1", "cost": 131.36})
         if km >= 750 and km <= 2500:
-            listAventos.append("HK2 (HKT2)")
+            listAventos.append({"name": "HK2", "cost": 131.36})
         if km >= 1500 and km <= 4900:
-            listAventos.append("HK3 (HKT3)")
+            listAventos.append({"name": "HK3", "cost": 131.36})
         if km >= 3200 and km <= 9000:
-            listAventos.append("HK4 (HKT4)")
+            listAventos.append({"name": "HK4", "cost": 131.36})
         return listAventos
 
     def HK_TIPON(self, km, weightFacade, width, height):
@@ -316,13 +316,13 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 480 and km <= 1500:
-            listAventos.append("HKT1")
+            listAventos.append({"name": "HKT1", "cost": 131.36})
         if km >= 750 and km <= 2500:
-            listAventos.append("HKT2")
+            listAventos.append({"name": "HKT2", "cost": 131.36})
         if km >= 1500 and km <= 4900:
-            listAventos.append("HKT3")
+            listAventos.append({"name": "HKT3", "cost": 131.36})
         if km >= 3200 and km <= 9000:
-            listAventos.append("HKT4")
+            listAventos.append({"name": "HKT4", "cost": 131.36})
         return listAventos
 
     def HK_S(self, km, weightFacade, width, height):
@@ -332,13 +332,13 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 220 and km <= 500:
-            listAventos.append("HKS1 (HKST1)")
+            listAventos.append({"name": "HKS1", "cost": 131.36})
         if km >= 400 and km <= 1000:
-            listAventos.append("HKS2 (HKST2)")
+            listAventos.append({"name": "HKS2", "cost": 131.36})
         if km >= 680 and km <= 1520:
-            listAventos.append("HKS3 (HKST3)")
+            listAventos.append({"name": "HKS3", "cost": 131.36})
         if km >= 960 and km <= 2215:
-            listAventos.append("HKS4 (HKST4)")
+            listAventos.append({"name": "HKS4", "cost": 131.36})
         return listAventos
 
     def HK_S_TIPON(self, km, weightFacade, width, height):
@@ -348,13 +348,13 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 220 and km <= 500:
-            listAventos.append("HKST1")
+            listAventos.append({"name": "HKST1", "cost": 131.36})
         if km >= 400 and km <= 1000:
-            listAventos.append("HKST2")
+            listAventos.append({"name": "HKST2", "cost": 131.36})
         if km >= 680 and km <= 1520:
-            listAventos.append("HKST3")
+            listAventos.append({"name": "HKST3", "cost": 131.36})
         if km >= 960 and km <= 2215:
-            listAventos.append("HKST4")
+            listAventos.append({"name": "HKST4", "cost": 131.36})
         return listAventos
 
     def HK_XS(self, km, weightFacade, width, height):
@@ -373,17 +373,17 @@ class AventosCalculate():
         if weightFacade > 18:
             return []
         if km >= 200 and km <= 1000:
-            listAventos.append("HXS1-"+str(hinge)+" (HXS1T-"+str(hinge)+")")
+            listAventos.append({"name": "HXS1-"+str(hinge), "cost": 131.36})
         if km >= 500 and km <= 1500:
-            listAventos.append("HXS2-"+str(hinge)+" (HXS2T-"+str(hinge)+")")
+            listAventos.append({"name": "HXS2-"+str(hinge), "cost": 131.36})
         if km >= 800 and km <= 1800:
-            listAventos.append("HXS3-"+str(hinge)+" (HXS3T-" + str(hinge) + ")")
+            listAventos.append({"name": "HXS3-"+str(hinge), "cost": 131.36})
         if km >= 400 and km <= 2000:
-            listAventos.append("HXS4-"+str(hinge)+" (HXS4T-"+str(hinge)+")")
+            listAventos.append({"name": "HXS4-"+str(hinge), "cost": 131.36})
         if km >= 1000 and km <= 3000:
-            listAventos.append("HXS5-"+str(hinge)+" (HXS5T-"+str(hinge)+")")
+            listAventos.append({"name": "HXS5-"+str(hinge), "cost": 131.36})
         if km >= 1600 and km <= 3600:
-            listAventos.append("HXS6-"+str(hinge)+" (HXS6T-"+str(hinge)+")")
+            listAventos.append({"name": "HXS6-"+str(hinge), "cost": 131.36})
 
         return listAventos
 
