@@ -1,8 +1,36 @@
 <html>
   <head>
       <meta CHARSET="utf-8">
-      <script type="text/javascript" src="files/jquery-3.6.0.min.js"></script>
+      <!-- script type="text/javascript" src="files/jquery-3.6.0.min.js"></script-->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <style>
+          #myModal {
+              width: 220px; height: 107px;
+              padding: 0px 0px;
+              border-radius: 4px;
+              background: #fafafa;
+              position: fixed;
+              top: 0; left: 0; right: 0; bottom: 0;
+              margin: auto;
+              display: none;
+              opacity: 0;
+              z-index: 38;
+              text-align: center;
+
+          }
+
+          #myOverlay {
+              z-index: 37;
+              position: fixed;
+              background: rgba(0, 0, 0, .7);
+              width: 100%;
+              height: 100%;
+              top: 0;
+              left: 0;
+              cursor: pointer;
+              display: none;
+          }
+
           .calculator {
               width: 290px;
               border-top: 1px solid #ccc;
@@ -14,6 +42,52 @@
               //border-top: 1px solid #ccc;
               //border-left: 1px solid #ccc;
           }
+          .table_discount {
+              font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+              width: 220px;
+              //border-top: 1px solid #ccc;
+              //border-left: 1px solid #ccc;
+          }
+          .table_discount td {
+              border: 1px solid #f17336;
+              //border-bottom: 1px solid #000000;
+              //border-right: 1px solid #000000;
+              //border-left: 1px solid #000000;
+              //border-top: 1px solid #000000;
+              //padding: 3px 8px 3px 8px;
+              text-align:center;
+          }
+
+          .table_discount th {
+              border-bottom: 1px solid #f17336;
+              border-right: 1px solid #f17336;
+              border-left: 1px solid #f17336;
+              border-top: 1px solid #f17336;
+              background: #f17336;
+              padding: 8px 0px 8px 0px;
+              color: #fff;
+              font-weight: bold;
+              //font-size: 15px;
+          }
+
+          .table_discount th.menu_button:hover {
+              background-color: #e2e2dd;
+              cursor: pointer;
+          }
+
+          .table_discount td.head {
+              font-weight: bold;
+              font-size: 14px;
+              white-space: nowrap;
+              width: 150px;
+          }
+          .table_discount td input {
+              width: 40px !important;
+              border: 1px solid #999;
+          }
+
+
+
           .calculator th {
               border-bottom: 1px solid #ccc;
               border-right: 1px solid #ccc;
@@ -44,6 +118,7 @@
 
           .table_result_css th.menu_button:hover {
               background-color: #e2e2dd;
+              cursor: pointer;
           }
           .parent:table_result_css th .head_table {
               border-bottom: 1px solid #f17336;
@@ -123,7 +198,26 @@
     var euro = 0.0
     var tipon = false
     var nationalCurrency = false
-   
+    var discount = 0
+    var keys = {};
+
+    $(document).keydown(function(e) {
+        keys[e.which] = true;
+
+        if (keys[17] && keys[18] && keys[49]) { // Ctrl + Alt + 1 in that order
+            console.log("pressed");
+            $('#myOverlay').fadeIn(297, function () {
+                $('#myModal')
+                    .css('display', 'block')
+                    .animate({opacity: 1}, 198);
+            });
+
+        }
+    });
+    $(document).keyup(function (e) {
+        delete keys[e.which];
+    });
+
     $(function () {
 
         var PlotnArray = Array();
@@ -138,6 +232,8 @@
         handleWeight[2] = {'name': 'Min2 handle', 'handleWeight': 0.2}
         handleWeight[3] = {'name': 'Middle handle', 'handleWeight': 0.5}
         handleWeight[4] = {'name': 'Heavy handle', 'handleWeight': 1}
+
+
 
 
         function ShowPictureType() {
@@ -319,9 +415,12 @@
 
                             if(nationalCurrency){
                                 costAventos = costAventos * euro
+                                costAventos = costAventos*(1-(discount/100))
                                 costAventos = costAventos.toFixed(2)
                                 costAventos = costAventos + "₽"
                             } else {
+                                costAventos = costAventos*(1-(discount/100))
+                                costAventos = costAventos.toFixed(2)
                                 costAventos = costAventos + "€"
                             }
                             content += '<tr>'
@@ -343,11 +442,15 @@
                         var nameAventos = response[kit]["set"][index]["name"]
                         var costAventos = response[kit]["set"][index]["cost"]
                          if(nationalCurrency){
-                            costAventos = costAventos * euro
+                             costAventos = costAventos * euro
+                             costAventos = costAventos*(1-(discount/100))
                              costAventos = costAventos.toFixed(2)
                              costAventos = costAventos + "₽"
+
                         } else {
-                                costAventos = costAventos + "€"
+                             costAventos = costAventos*(1-(discount/100))
+                             costAventos = costAventos.toFixed(2)
+                             costAventos = costAventos + "€"
                         }
                         content += '<tr>'
                         content += '<th>'
@@ -382,6 +485,17 @@
                 tipon = true
                 CreateTableToAventosKits2(response)
             });
+            $('#myModal__close, #myOverlay').click(function () {
+                console.log($("input[name=amount_discount]").val());
+                discount = $("input[name=amount_discount]").val()
+                CreateTableToAventosKits2(response)
+
+                $('#myModal').animate({opacity: 0}, 198, function () {
+                    $(this).css('display', 'none');
+                    $('#myOverlay').fadeOut(297);
+                });
+            });
+
         }
 
 
@@ -517,6 +631,30 @@
 </tr>
 </table>
 
+    <div id="myModal">
+        <!-- span id="myModal__close" class="close">ₓ</span -->
+        <table class="table_discount">
+            <tbody>
+            <tr>
+            <th colspan="2" style="color: #000000">Установить скидку</th>
+            </tr>
+            <tr>
+                <td class="head">Поцент, %</td>
+                <td>
+                    <!--select name="discount" class="discount">
+                        <option value="0">Наценка</option>
+                        <option value="1">Скидка</option>
+                    </select-->
+                    <input type="number" min="0" max="100" step="0.1" name="amount_discount" value="0">%
+                </td>
+            </tr>
+            <tr>
+            <th colspan="2" class="menu_button" id="myModal__close">Применить скидку</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="myOverlay"></div>
 
   </body>
 </html>
