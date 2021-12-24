@@ -5,7 +5,7 @@
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <style>
           #myModal {
-              width: 220px; height: 107px;
+              width: 320px; height: 140px;
               padding: 0px 0px;
               border-radius: 4px;
               background: #fafafa;
@@ -18,7 +18,12 @@
               text-align: center;
 
           }
-
+          .table_discount input[type=radio] {
+              margin-right: 0;
+              margin-left: 0;
+              width: 20px;
+              height: 20px;
+          }
           #myOverlay {
               z-index: 37;
               position: fixed;
@@ -44,7 +49,7 @@
           }
           .table_discount {
               font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-              width: 220px;
+              width: 320px;
               //border-top: 1px solid #ccc;
               //border-left: 1px solid #ccc;
           }
@@ -194,11 +199,12 @@
     <script type="text/javascript">
     // var
     let facade_width =  [400, 450, 500, 550, 600, 700, 800, 900, 1000, 1200, 1500, 1800];
-    let facede_height = [300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1040]
-    var euro = 0.0
-    var tipon = false
-    var nationalCurrency = false
-    var discount = 0
+    let facede_height = [300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1040];
+    var euro = 0.0;
+    var tipon = false;
+    var nationalCurrency = false;
+    var discount_one = 0;
+    var discount_two = 0;
     var keys = {};
 
     $(document).keydown(function(e) {
@@ -413,13 +419,13 @@
                             var nameAventos = response[kit]["set"][index]["name"]
                             var costAventos = response[kit]["set"][index]["cost"]
 
+                            costAventos = costAventos*(1-(discount_one/100))
+                            costAventos = costAventos*(1-(discount_two/100))
                             if(nationalCurrency){
                                 costAventos = costAventos * euro
-                                costAventos = costAventos*(1-(discount/100))
                                 costAventos = costAventos.toFixed(2)
                                 costAventos = costAventos + "₽"
                             } else {
-                                costAventos = costAventos*(1-(discount/100))
                                 costAventos = costAventos.toFixed(2)
                                 costAventos = costAventos + "€"
                             }
@@ -441,14 +447,14 @@
                         var index = 0
                         var nameAventos = response[kit]["set"][index]["name"]
                         var costAventos = response[kit]["set"][index]["cost"]
+                        costAventos = costAventos*(1-(discount_one/100))
+                        costAventos = costAventos*(1-(discount_two/100))
                          if(nationalCurrency){
                              costAventos = costAventos * euro
-                             costAventos = costAventos*(1-(discount/100))
                              costAventos = costAventos.toFixed(2)
                              costAventos = costAventos + "₽"
 
                         } else {
-                             costAventos = costAventos*(1-(discount/100))
                              costAventos = costAventos.toFixed(2)
                              costAventos = costAventos + "€"
                         }
@@ -486,8 +492,8 @@
                 CreateTableToAventosKits2(response)
             });
             $('#myModal__close, #myOverlay').click(function () {
-                console.log($("input[name=amount_discount]").val());
-                discount = $("input[name=amount_discount]").val()
+                discount_one = $('input[name="discount_radio"]:checked').val();
+                discount_two = $("input[name=amount_discount]").val()
                 CreateTableToAventosKits2(response)
 
                 $('#myModal').animate({opacity: 0}, 198, function () {
@@ -633,18 +639,21 @@
 
     <div id="myModal">
         <!-- span id="myModal__close" class="close">ₓ</span -->
+        <form>
         <table class="table_discount">
             <tbody>
             <tr>
             <th colspan="2" style="color: #000000">Установить скидку</th>
             </tr>
             <tr>
+                <td colspan="2">
+                    <input type="radio" name="discount_radio" value="0" checked> Розница
+                    <input type="radio" name="discount_radio" value="25">Юр. Лица
+                </td>
+            </tr>
+            <tr>
                 <td class="head">Поцент, %</td>
                 <td>
-                    <!--select name="discount" class="discount">
-                        <option value="0">Наценка</option>
-                        <option value="1">Скидка</option>
-                    </select-->
                     <input type="number" min="0" max="100" step="0.1" name="amount_discount" value="0">%
                 </td>
             </tr>
@@ -653,6 +662,7 @@
             </tr>
             </tbody>
         </table>
+        </form>
     </div>
     <div id="myOverlay"></div>
 
