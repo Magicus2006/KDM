@@ -18,9 +18,9 @@ from django.urls import path, include
 from aventos2 import views
 
 urlpatterns = [
+    path('', views.index),    
     path('admin/', admin.site.urls),
     #path('api1/', include('article.urls')),
     path('api/', include('aventos.urls')),
     path('api/v2/', include('aventos2.urls')),
-    path('', views.index, name='index'),
 ]

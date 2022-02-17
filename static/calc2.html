@@ -408,9 +408,9 @@
                 withOutTipon = 'style="text-decoration: underline"'
             }
             content += '<tr><td style="border: #000000"></td>'
-            content += '<th id="btnWithOutTipOn" class="menu_button"'+ withOutTipon +'>Без TIP-ON</th>'
-            content += '<th id="btnWitTipOn" class="menu_button"'+ withTipon +'>С TIP-ON</th>'
-            content += '<tr><th  style="color: #000000"> Тип Aventos</th><th style="color: #000000">Комплект</th><th style="color: #000000">Цена, <a href="javascript:void(0)" class="euro">€</a>, <a href="javascript:void(0)" class="rub">₽</a></th></tr>'
+            content += '<th id="btnWithOutTipOn" class="menu_button"'+ withOutTipon +'>BLUMOTION<br>(с доводчиком)</th>'
+            content += '<th id="btnWitTipOn" class="menu_button"'+ withTipon +'>TIP-ON<br>(открывание без ручки)</th>'
+            content += '<tr><th  style="color: #000000">Тип подъемника<br>AVENTOS</th><th style="color: #000000">Комплект</th><th style="color: #000000">Цена, <a href="javascript:void(0)" class="euro">€</a>, <a href="javascript:void(0)" class="rub">₽</a></th></tr>'
             for (var kit in response) {
                 console.log(kit, " len", response[kit].length)
                 if(response[kit]["tipon"] == tipon) {
@@ -566,7 +566,7 @@
     });
 </script>
 <div class="CalcPad">
-    <h1>Подбор комплекта AVENTOS в зависимости от фасада</h1><br>
+    <h2>Подбор комплекта AVENTOS в зависимости от размеров фасада</h2><br>
 
                 <table class="calculator">
                     <tbody><tr>
@@ -628,7 +628,7 @@
             
     
 </div>
-    <h2>Варианты подъемников</h2>
+    <h2>Наш калькулятор автоматически предлагает, все типы подъемников,<br>подходящие под выбранные Вами характеристика фасада.</h2>
     <div id="divAventosTypes"></div>
     <!-- h2>Таблица для подбора коэффициента мощности вручную.</h2>
     <div id="table_result"></div-->
