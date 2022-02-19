@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-mkfmznlo&6nn7(*itqkz194nb&kg!fvgvc64aj=pbse%00hi26
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['*']
 
 logging.config.dictConfig({
@@ -59,7 +60,41 @@ logging.config.dictConfig({
         }
     }
 })
+=======
+ALLOWED_HOSTS = ['*','84.252.75.182','www.dmk68.tech','dmk68.tech']
+>>>>>>> 1e7ca97759ef4fcb4ff3b9d02c050ef9ad38e93d
 
+"""
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(name)-12s %(levelname)-8s %(message)s'
+        },
+        'file': {
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'file',
+            'filename': '/var/www/KDM/log/debug.log'
+        }
+    },
+    'loggers': {
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'file']
+        }
+    }
+})"""
 
 # Application definition
 
