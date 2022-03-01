@@ -619,8 +619,8 @@ class AventosCalculate():
             "HXST6-3": 46.22,
             "HXST6-4": 49.19,
         }
-        print("1111:", price["HS1"])
+
         if name in price:
             return price[name]
         else:
-            return 1.00
+            return 0.00
