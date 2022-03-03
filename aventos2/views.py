@@ -30,6 +30,8 @@ class AventosTypeView(APIView):
         km = int(round(weightFacade * height,0))
         km2 = int(round(weightFacade2 * height, 0))
 
+        print(km, weightFacade, width, height)
+
         listAventos = {}
         aventosCalculate = AventosCalculate()
         listAventosHS = aventosCalculate.HS(weightFacade, width, height)

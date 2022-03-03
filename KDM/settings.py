@@ -76,7 +76,8 @@ INSTALLED_APPS = [
     #'article',
     #'nomenclatura',
     'aventos',
-    'aventos2'
+    'aventos2',
+    'currency',
 ]
 
 MIDDLEWARE = [
