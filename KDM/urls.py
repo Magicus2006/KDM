@@ -23,6 +23,6 @@ urlpatterns = [
     #path('api1/', include('article.urls')),
     path('api/', include('aventos.urls')),
     path('api/v2/', include('aventos2.urls')),
-    path('currency/', include('currency.urls')),
+    #path('currency/', include('currency.urls')),
     path('l/', include('lifts.urls'))
 ]
