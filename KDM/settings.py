@@ -77,7 +77,7 @@ INSTALLED_APPS = [
     #'nomenclatura',
     'aventos',
     'aventos2',
-    'currency',
+    #'currency',
     'lifts',
 ]
 
