@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-import requests
+#import requests
 from datetime import date
 #from requests.structures import CaseInsensitiveDict
 import xml.etree.ElementTree as ET
@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 # Create your views here.
 
 
-class CurrencyAPI(APIView):
+"""class CurrencyAPI(APIView):
     def get(self, request):
         url = "https://cbr.ru/scripts/XML_daily.asp?date-req=05/03/2022"
         result = requests.get(url=url)
@@ -40,4 +40,4 @@ class CurrencyAPI(APIView):
             print(e)
             return Response(f'Error: {e}, {e.code} {e.position}')
 
-        return Response(json_respon)
+        return Response(json_respon)"""
