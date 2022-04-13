@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'aventos',
     'aventos2',
     'currency',
+    'lifts',
 ]
 
 MIDDLEWARE = [
