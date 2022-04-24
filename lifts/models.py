@@ -108,6 +108,7 @@ class CalculationTableWeightFacade(models.Model):
         verbose_name="Производитель",
     )
     display = models.BooleanField(verbose_name="Показывать", default=False)
+
     class Meta:
         verbose_name = 'Подъемники по весу'
         verbose_name_plural = 'Подъемники по весу'
