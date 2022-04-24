@@ -1,7 +1,8 @@
-from django.shortcuts import render
+import re
+from django.shortcuts import render, HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import CalculationTable, CalculationTableWeightFacade
+from .models import CalculationTable, CalculationTableWeightFacade, VendorCode
 from django.core import serializers
 
 # EQ("="), GTE(">="), GT(">"), LT("<"), LTE("<=");
@@ -33,7 +34,8 @@ class Lifts(APIView):
             .filter(heightFacadeFrom__lte=height)\
             .filter(heightFacadeTo__gte=height)\
             .filter(indexFrom__lte=index)\
-            .filter(indexTo__gte=index)
+            .filter(indexTo__gte=index)\
+            .filter(display=True)
 
         # Формируем ответ из подемников считающихся по индексу
         for lift in queryset:
@@ -49,7 +51,8 @@ class Lifts(APIView):
             .filter(weightFacadeFrom__lte=weightFacadeHandle)\
             .filter(weightFacadeTo__gte=weightFacadeHandle)\
             .filter(heightFacadeFrom__lte=height)\
-            .filter(heightFacadeTo__gte=height)
+            .filter(heightFacadeTo__gte=height)\
+            .filter(display=True)
 
         # Формируем ответ из подемников считающихся по весу
         for lift in queryset:
@@ -63,3 +66,58 @@ class Lifts(APIView):
 
         #print(queryset)
         return Response(lifts)
+
+def detail(request):
+    #print(re.sub(r'(\w{2}\d{2}\w{2})(\d{2}\w{1})', r'\1', 'ST01AL02A'))
+    #queryset = CalculationTableWeightFacade.objects \
+    #    .select_related('vendorCode') \
+    #    .filter(nameBrand__name="DTC") \
+    #    .filter(vendorCode__vendorCode__regex='^(\w{6})$').update(display=True)
+
+    queryset = CalculationTable.objects.select_related('vendorCode')\
+        .filter(nameBrand__name="DTC")\
+        #.filter(vendorCode__vendorCode__regex='^(\w{6})$').update(display=True)
+
+    for x in queryset:
+        lenVendorCode = len(x.vendorCode.vendorCode)
+        print(lenVendorCode)
+        if lenVendorCode == 9:
+            newVendorCode = re.sub(r'(\w{2}\w{2}\w{2})(\d{2}\w{1})', r'\1', x.vendorCode.vendorCode)
+            print(newVendorCode)
+        elif lenVendorCode == 8:
+            newVendorCode = re.sub(r'(\w{2}\w{2}\w{2})(\d{2})', r'\1', x.vendorCode.vendorCode)
+            print(newVendorCode)
+
+
+        #print(x.vendorCode,
+        #      x.weightFacadeFrom,
+        #      x.weightFacadeTo,
+        #      x.heightFacadeFrom,
+        #      x.heightFacadeTo,
+        #      x.nameBrand,
+        #      x.liftType,
+        #      x.display)
+
+
+        
+        #print(newVendorCode)
+        try:
+            vc = VendorCode(vendorCode=newVendorCode, name=x.vendorCode.name, cost=x.vendorCode.cost, currency=x.vendorCode.currency)
+            vc.save()
+            q = CalculationTable(vendorCode=vc,
+                  indexFrom=x.indexFrom,
+                  indexTo=x.indexTo,
+                  heightFacadeFrom=x.heightFacadeFrom,
+                  heightFacadeTo=x.heightFacadeTo,
+                  nameBrand=x.nameBrand,
+                  liftType=x.liftType,
+                  display=True)
+
+            q.save()
+            print(q)
+        except:
+            print("Fail")
+            pass
+
+
+    return HttpResponse("You're looking at question.") # %d" % queryset.count())

@@ -6,27 +6,32 @@ from .models import NameBrend, LiftType, Currency, VendorCode, CalculationTable,
 admin.site.register(NameBrend)
 admin.site.register(LiftType)
 admin.site.register(Currency)
+
 @admin.register(VendorCode)
 class VendorCodeAdmin(admin.ModelAdmin):
     search_fields = ("vendorCode__startswith", )
 
 @admin.register(CalculationTableWeightFacade)
 class CalculationTableWeightFacadeAdmin(admin.ModelAdmin):
-    list_display = ("weightFacadeFrom",
+    list_display = ("vendorCode",
+                    "weightFacadeFrom",
                     "weightFacadeTo",
                     "heightFacadeFrom",
                     "heightFacadeTo",
-                    "vendorCode",
-                    "liftType")
+                    "liftType",
+                    "nameBrand",
+                    "display")
 
 @admin.register(CalculationTable)
 class CalculationTableAdmin(admin.ModelAdmin):
-    list_display = ("indexFrom",
+    list_display = ("vendorCode",
+                    "indexFrom",
                     "indexTo",
                     "heightFacadeFrom",
                     "heightFacadeTo",
-                    "vendorCode",
-                    "liftType")
+                    "liftType",
+                    "nameBrand",
+                    "display")
     list_filter = ("liftType",)
 
 #admin.site.register(CalculationTableWeightFacade)
