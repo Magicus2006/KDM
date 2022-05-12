@@ -50,6 +50,7 @@ class VendorCode(models.Model):
         verbose_name = 'Артикулы'
         verbose_name_plural = 'Артикулы'
 
+
 # Модель для хранения данных подъемников по индексу
 class CalculationTable(models.Model):
     indexFrom = models.IntegerField(verbose_name="Индекс от")

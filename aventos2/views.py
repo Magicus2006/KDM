@@ -514,22 +514,22 @@ class AventosCalculate():
         listAventos = []
         if weightFacade > 18:
             return []
-        if km >= 200 and km <= 1000:
+        if km >= 180 and km <= 800:
             name = "HXST1-" + str(hinge)
             listAventos.append({"name": name, "cost": self.costAventosSet(name)})
-        if km >= 500 and km <= 1500:
+        if km >= 500 and km <= 1200:
             name = "HXST2-" + str(hinge)
             listAventos.append({"name": name, "cost": self.costAventosSet(name)})
-        if km >= 800 and km <= 1800:
+        if km >= 800 and km <= 1600:
             name = "HXST3-" + str(hinge)
             listAventos.append({"name": name, "cost": self.costAventosSet(name)})
-        if km >= 400 and km <= 2000:
+        if km >= 360 and km <= 1600:
             name = "HXST4-" + str(hinge)
             listAventos.append({"name": name, "cost": self.costAventosSet(name)})
-        if km >= 1000 and km <= 3000:
+        if km >= 1000 and km <= 2400:
             name = "HXST5-" + str(hinge)
             listAventos.append({"name": name, "cost": self.costAventosSet(name)})
-        if km >= 1600 and km <= 3600:
+        if km >= 1600 and km <= 3200:
             name = "HXST6-" + str(hinge)
             listAventos.append({"name": name, "cost": self.costAventosSet(name)})
 
