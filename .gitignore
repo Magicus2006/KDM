@@ -1,3 +1,12 @@
 /aventos2/primer.json
-/db.sqlite3
-/KDM/settings.py
+db.sqlite3
+/lifts/migrations/0007_auto_20220421_2340.py
+/lifts/migrations/0008_auto_20220421_2344.py
+/shoping/migrations/__init__.py
+/shoping/__init__.py
+/shoping/admin.py
+/shoping/apps.py
+/shoping/models.py
+/currency/test.html
+/shoping/tests.py
+/shoping/views.py
