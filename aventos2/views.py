@@ -49,19 +49,19 @@ class AventosTypeView(APIView):
         listAventosHK_XS = aventosCalculate.HK_XS(km2, weightFacade2, width, height)
         listAventosHK_XS_TIPON = aventosCalculate.HK_XS_TIPON(km2, weightFacade2, width, height)
         if listAventosHF != [] and listAventosHF != None:
-            listAventos.update({"HF": {"set": listAventosHF, "tipon": False}})
+            listAventos.update({"Складной подъёмник AVENTOS HF": {"set": listAventosHF, "tipon": False}})
 
         if listAventosHS != [] and listAventosHS != None:
-            listAventos.update({"HS": {"set": listAventosHS, "tipon": False}})
+            listAventos.update({"Откидной подъёмник AVENTOS HS": {"set": listAventosHS, "tipon": False}})
 
         if listAventosHL != [] and listAventosHL != None:
-            listAventos.update({"HL": {"set": listAventosHL, "tipon": False}})
+            listAventos.update({"Вертикальный подъёмник AVENTOS HL": {"set": listAventosHL, "tipon": False}})
 
         if listAventosHK_top != [] and listAventosHK_top != None:
-            listAventos.update({"HK Top": {"set": listAventosHK_top, "tipon": False}})
+            listAventos.update({"Поворотный подъёмник AVENTOS HK Top": {"set": listAventosHK_top, "tipon": False}})
 
         if listAventosHK_top_TIPON != [] and listAventosHK_top_TIPON != None:
-            listAventos.update({"HK Top TIP-ON": {"set": listAventosHK_top_TIPON, "tipon": True}})
+            listAventos.update({"Поворотный подъёмник AVENTOS HK Top TIP-ON": {"set": listAventosHK_top_TIPON, "tipon": True}})
         '''
         if listAventosHK != [] and listAventosHK != None:
             listAventos.update({"HK": {"set": listAventosHK, "tipon": False}})
@@ -70,16 +70,16 @@ class AventosTypeView(APIView):
             listAventos.update({"HK TIP-ON": {"set": listAventosHK_TIPON, "tipon": True}})
         '''
         if listAventosHK_S != [] and listAventosHK_S != None:
-            listAventos.update({"HK-S": {"set": listAventosHK_S, "tipon": False}})
+            listAventos.update({"Малый поворотный подъёмник AVENTOS HK-S": {"set": listAventosHK_S, "tipon": False}})
 
         if listAventosHK_S_TIPON != [] and listAventosHK_S_TIPON != None:
-            listAventos.update({"HK-S TIP-ON": {"set": listAventosHK_S_TIPON, "tipon": True}})
+            listAventos.update({"Малый поворотный подъёмник AVENTOS HK-S TIP-ON": {"set": listAventosHK_S_TIPON, "tipon": True}})
 
         if listAventosHK_XS != [] and listAventosHK_XS != None:
-            listAventos.update({"HK-XS": {"set": listAventosHK_XS, "tipon": False}})
+            listAventos.update({"Компактный подъёмник AVENTOS HK-XS": {"set": listAventosHK_XS, "tipon": False}})
 
         if listAventosHK_XS_TIPON != [] and listAventosHK_XS_TIPON != None:
-            listAventos.update({"HK-XS TIP-ON": {"set": listAventosHK_XS_TIPON, "tipon": True}})
+            listAventos.update({"Компактный подъёмник AVENTOS HK-XS TIP-ON": {"set": listAventosHK_XS_TIPON, "tipon": True}})
 
         print(listAventos)
         return Response(listAventos)
