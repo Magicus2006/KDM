@@ -10,11 +10,17 @@ from django.core import serializers
 class Lifts(APIView):
     #{"handleWeight":0.1,"height":375,"thickness":16,"width":800,"density":760}
     def post(self, request):
-        width = request.data.get('width')
-        height = request.data.get('height')
+        width = request.data.get('width') # Шыринв
+        height = request.data.get('height') # Высота
         thickness = request.data.get('thickness')  # Толщина
         handleWeight = request.data.get('handleWeight')  # Вес ручки
         density = request.data.get('density')  # Плотность
+        #nameBrand = request.data.get('nameBrand') # Brand
+
+        #  {"handleWeight":0,"height":370,"thickness":16,"width":800,"density":760}
+        # Проверяем передали ли параметр nameBrand если нет то ставим по умолчанию DTC
+        if(nameBrand := request.data.get('nameBrand')) is None:
+            nameBrand = "DTC"
 
         # Считаем вес фасада
         weightFacade = (width / 1000) * (height / 1000) * (thickness / 1000) * density
@@ -30,7 +36,7 @@ class Lifts(APIView):
         # Формируем запрос на подемников считающихся по индексу
         queryset = CalculationTable.objects \
             .select_related('vendorCode') \
-            .filter(nameBrand__name="DTC")\
+            .filter(nameBrand__name=nameBrand)\
             .filter(heightFacadeFrom__lte=height)\
             .filter(heightFacadeTo__gte=height)\
             .filter(indexFrom__lte=index)\
@@ -47,7 +53,7 @@ class Lifts(APIView):
         # Формируем запрос на подемников считающихся по весу
         queryset = CalculationTableWeightFacade.objects\
             .select_related('vendorCode')\
-            .filter(nameBrand__name="DTC")\
+            .filter(nameBrand__name=nameBrand)\
             .filter(weightFacadeFrom__lte=weightFacadeHandle)\
             .filter(weightFacadeTo__gte=weightFacadeHandle)\
             .filter(heightFacadeFrom__lte=height)\
