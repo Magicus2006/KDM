@@ -11,9 +11,9 @@ admin.site.register(Currency)
 class VendorCodeAdmin(admin.ModelAdmin):
     search_fields = ("vendorCode__startswith", )
     list_display = ("vendorCode",
-    "name",
-    "cost",
-    "currency")
+                    "name",
+                    "cost",
+                    "currency")
     list_filter = ("cost",)
 
 @admin.register(CalculationTableWeightFacade)
