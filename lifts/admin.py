@@ -7,18 +7,14 @@ admin.site.register(NameBrend)
 admin.site.register(LiftType)
 admin.site.register(Currency)
 
-""" 
-    Артикулы
-"""
 @admin.register(VendorCode)
 class VendorCodeAdmin(admin.ModelAdmin):
     search_fields = ("vendorCode__startswith", )
     list_display = ("vendorCode",
-                    "name",
-                    "cost",
-                    "currency")
-
-
+    "name",
+    "cost",
+    "currency")
+    list_filter = ("cost",)
 
 @admin.register(CalculationTableWeightFacade)
 class CalculationTableWeightFacadeAdmin(admin.ModelAdmin):

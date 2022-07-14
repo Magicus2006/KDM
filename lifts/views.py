@@ -80,7 +80,7 @@ def detail(request):
     #    .filter(nameBrand__name="DTC") \
     #    .filter(vendorCode__vendorCode__regex='^(\w{6})$').update(display=True)
 
-    queryset = CalculationTable.objects.select_related('vendorCode')\
+    """queryset = CalculationTable.objects.select_related('vendorCode')\
         .filter(nameBrand__name="DTC")\
         #.filter(vendorCode__vendorCode__regex='^(\w{6})$').update(display=True)
 
@@ -105,7 +105,7 @@ def detail(request):
         #      x.display)
 
 
-        
+
         #print(newVendorCode)
         try:
             vc = VendorCode(vendorCode=newVendorCode, name=x.vendorCode.name, cost=x.vendorCode.cost, currency=x.vendorCode.currency)
@@ -124,6 +124,7 @@ def detail(request):
         except:
             print("Fail")
             pass
+    """
 
 
     return HttpResponse("You're looking at question.") # %d" % queryset.count())

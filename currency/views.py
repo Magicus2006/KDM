@@ -2,13 +2,23 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 #import requests
-from datetime import date
+#from datetime import date
 #from requests.structures import CaseInsensitiveDict
-import xml.etree.ElementTree as ET
+#import xml.etree.ElementTree as ET
 
 
 # Create your views here.
+class AventosTypeView(APIView):
+    '''
+    def get(self, request):
+        width = request.data.get('width')
+        height = request.data.get('height')
+        print(width, height, request.data)
+        return Response({"width": width, "height": height})
+    '''
 
+    def post(self, request):
+        pass
 
 """class CurrencyAPI(APIView):
     def get(self, request):
