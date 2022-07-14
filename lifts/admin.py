@@ -13,7 +13,7 @@ class VendorCodeAdmin(admin.ModelAdmin):
     list_display = ("vendorCode",
                     "name",
                     "cost",
-                    "currency")
+                    "currency",)
     list_filter = ("cost",)
 
 @admin.register(CalculationTableWeightFacade)
