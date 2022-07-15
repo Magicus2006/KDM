@@ -1,9 +1,9 @@
-import re
+#import re
 from django.shortcuts import render, HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import CalculationTable, CalculationTableWeightFacade, VendorCode
-from django.core import serializers
+#from django.core import serializers
 
 # EQ("="), GTE(">="), GT(">"), LT("<"), LTE("<=");
 
