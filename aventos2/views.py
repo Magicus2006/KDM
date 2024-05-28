@@ -295,6 +295,7 @@ class AventosCalculate():
                 listAventos.append("HFT252")
             if height >= 840 and height <= 1200:
                 listAventos.append("HFT253")
+
         # коэффициент мощности=10000-19300
         if km >= 10000 and km <= 19300:
             if height >= 600 and height <= 900:
