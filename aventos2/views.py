@@ -37,6 +37,7 @@ class AventosTypeView(APIView):
         listAventosHS = aventosCalculate.HS(weightFacade, width, height)
         listAventosHL = aventosCalculate.HL(weightFacade, width, height)
         listAventosHF = aventosCalculate.HF(km, weightFacade, width, height)
+        listAventosHFTop = aventosCalculate.HFTop(km, weightFacade, width, height)
         listAventosHK_top = aventosCalculate.HK_top(km2, weightFacade2, width, height)
         listAventosHK_top_TIPON = aventosCalculate.HK_top_TIPON(km2, weightFacade2, width, height)
         '''
@@ -48,8 +49,11 @@ class AventosTypeView(APIView):
         listAventosHK_S_TIPON = aventosCalculate.HK_S_TIPON(km2, weightFacade2, width, height)
         listAventosHK_XS = aventosCalculate.HK_XS(km2, weightFacade2, width, height)
         listAventosHK_XS_TIPON = aventosCalculate.HK_XS_TIPON(km2, weightFacade2, width, height)
+
         if listAventosHF != [] and listAventosHF != None:
             listAventos.update({"Складной подъёмник HF": {"set": listAventosHF, "tipon": False}})
+        if listAventosHFTop != [] and listAventosHFTop != None:
+            listAventos.update({"Складной подъёмник HF Top": {"set": listAventosHFTop, "tipon": False}})
 
         if listAventosHS != [] and listAventosHS != None:
             listAventos.update({"Откидной подъёмник HS": {"set": listAventosHS, "tipon": False}})
