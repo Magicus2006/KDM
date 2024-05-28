@@ -277,7 +277,34 @@ class AventosCalculate():
         else:
             listAventos = None
         return listAventos
-    
+
+    def HFTop(self, km, weightFacade, width, height):
+        """
+                   Фукция возращает комплект подъемника Aventos HF
+                       km - Коэффициент мощности
+                       weightFacade - Вес фасада
+                       weight - ширина фасада
+                       height - Высота фасада
+        """
+        listAventos = []
+        # коэффициент мощности=2700-13500
+        if km >= 2700 and km <= 13500:
+            if height >= 600 and height <= 900:
+                listAventos.append("HFT251")
+            if height >= 760 and height <= 1040:
+                listAventos.append("HFT252")
+            if height >= 840 and height <= 1200:
+                listAventos.append("HFT253")
+        # коэффициент мощности=10000-19300
+        if km >= 10000 and km <= 19300:
+            if height >= 600 and height <= 900:
+                listAventos.append("HFT281")
+            if height >= 760 and height <= 1040:
+                listAventos.append("HFT282")
+            if height >= 840 and height <= 1200:
+                listAventos.append("HFT283")
+        return listAventos
+
     def HF(self, km, weightFacade, width, height):
         """
             Фукция возращает комплект подъемника Aventos HF
