@@ -34,7 +34,8 @@ class AventosTypeView(APIView):
         print(weightFacade, height)
         listAventosHS = aventosCalculate.HS(weightFacade, height)
         listAventosHL = aventosCalculate.HL(weightFacade, height)
-        listAventosHF = aventosCalculate.HF(km, weightFacade, width, height)
+
+
         listAventosHK_top = aventosCalculate.HK_top(km2, weightFacade2)
         listAventosHK_top_TIPON = aventosCalculate.HK_top_TIPON(km2, weightFacade2)
         listAventosHK = aventosCalculate.HK(km2, weightFacade2)
@@ -43,12 +44,22 @@ class AventosTypeView(APIView):
         listAventosHK_S_TIPON = aventosCalculate.HK_S_TIPON(km2, weightFacade2)
         listAventosHK_XS = aventosCalculate.HK_XS(km2, weightFacade2, width)
         listAventosHK_XS_TIPON = aventosCalculate.HK_XS_TIPON(km2, weightFacade2, width)
+
+
         if listAventosHS != [] and listAventosHS != None:
             listAventos.update({"HS": listAventosHS})
+
         if listAventosHL != [] and listAventosHL != None:
             listAventos.update({"HL": listAventosHL})
+
+        # Подбор HF и HF top
+        listAventosHF = aventosCalculate.HF(km, weightFacade, width, height)
         if listAventosHF != [] and listAventosHF != None:
             listAventos.update({"HF": listAventosHF})
+        listAventosHFTop = aventosCalculate.HFTop(km, weightFacade, width, height)
+        if listAventosHFTop != [] and listAventosHFTop != None:
+            listAventos.update({"HF Top": listAventosHFTop})
+
         if listAventosHK_top != [] and listAventosHK_top != None:
             listAventos.update({"HK Top": listAventosHK_top})
         if listAventosHK_top_TIPON != [] and listAventosHK_top_TIPON != None:
@@ -65,6 +76,7 @@ class AventosTypeView(APIView):
             listAventos.update({"HK-XS": listAventosHK_XS})
         if listAventosHK_XS_TIPON != [] and listAventosHK_XS_TIPON != None:
             listAventos.update({"HK-XS TIP-ON": listAventosHK_XS_TIPON})
+
         print(listAventos)
         return Response(listAventos)
 
@@ -207,6 +219,33 @@ class AventosCalculate():
                 listAventos.append("HS3")
         else:
             listAventos = None
+        return listAventos
+
+    def HFTop(self, km, weightFacade, width, height):
+        """
+                   Фукция возращает комплект подъемника Aventos HF
+                       km - Коэффициент мощности
+                       weightFacade - Вес фасада
+                       weight - ширина фасада
+                       height - Высота фасада
+        """
+        listAventos = []
+        # коэффициент мощности=2700-13500
+        if km >= 2700 and km <= 13500:
+            if height >= 600 and height <= 900:
+                listAventos.append("HFT251")
+            if height >= 760 and height <= 1040:
+                listAventos.append("HFT252")
+            if height >= 840 and height <= 1200:
+                listAventos.append("HFT253")
+        # коэффициент мощности=10000-19300
+        if km >= 10000 and km <= 19300:
+            if height >= 600 and height <= 900:
+                listAventos.append("HFT281")
+            if height >= 760 and height <= 1040:
+                listAventos.append("HFT282")
+            if height >= 840 and height <= 1200:
+                listAventos.append("HFT283")
         return listAventos
     def HF(self, km, weightFacade, width, height):
         """
