@@ -355,10 +355,10 @@ class AventosCalculate():
         listAventos = []
         # коэффициент мощности=2700-13500
         if km >= 2700 and km <= 13500:
-            if height >= 600 and height <= 900:
+            if height >= 480 and height <= 610:
                 name = "HFT251"
                 listAventos.append({"name": name, "cost": self.costAventosSet(name)})
-            if height >= 760 and height <= 1040:
+            if height >= 600 and height <= 910:
                 name = "HFT252"
                 listAventos.append({"name": name, "cost": self.costAventosSet(name)})
             if height >= 840 and height <= 1200:
@@ -367,10 +367,10 @@ class AventosCalculate():
 
         # коэффициент мощности=10000-19300
         if km >= 10000 and km <= 19300:
-            if height >= 600 and height <= 900:
+            if height >= 480 and height <= 610:
                 name = "HFT281"
                 listAventos.append({"name": name, "cost": self.costAventosSet(name)})
-            if height >= 760 and height <= 1040:
+            if height >= 600 and height <= 910:
                 name = "HFT282"
                 listAventos.append({"name": name, "cost": self.costAventosSet(name)})
             if height >= 840 and height <= 1200:
